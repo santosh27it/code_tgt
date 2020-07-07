@@ -1,0 +1,19 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  - column_name: id_cppibsec
+    new_column_name: cppib_sec_id
+  - column_name: id_cppibprty
+    new_column_name: cppib_party_id
+  df_pipeline_column_type_conversion:
+  - column_name: cppib_sec_id
+    new_type: bigint
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: df_meta_run_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: pas_de_security_equity
+    output_path: s3://cppib-data-fabric-trusted-${env}/pas_de/pas_de_security_equity

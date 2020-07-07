@@ -1,0 +1,168 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  df_pipeline_derive_column:
+    - new_column_name: as_of_date
+      column_name: as_of_date
+      expression:
+        name: df_extract_date
+        arg: YYYYMMDD
+  df_pipeline_column_type_conversion:
+  - column_name: met_coal_potential_emissions
+    new_type: double
+  - column_name: met_coal_reserves_volume
+    new_type: double
+  - column_name: th_coal_potential_emissions
+    new_type: double
+  - column_name: th_coal_reserves_volume
+    new_type: double
+  - column_name: coal_potential_emissions
+    new_type: double
+  - column_name: coal_reserves_volume
+    new_type: double
+  - column_name: thermal_coal_max_rev_pct
+    new_type: double
+  - column_name: as_of_date
+    new_type: date
+  - column_name: intensity_of_ff_reserves
+    new_type: double
+  - column_name: total_potential_emissions
+    new_type: double
+  - column_name: total_energy_content
+    new_type: double
+  - column_name: total_potential_emissions_ex_met_coal
+    new_type: double
+  - column_name: oil_sands_max_rev_pct
+    new_type: double
+  - column_name: rev_biofuels
+    new_type: double
+  - column_name: og_rev_distribution
+    new_type: double
+  - column_name: og_rev_equipmt_services
+    new_type: double
+  - column_name: og_rev_extraction_prod
+    new_type: double
+  - column_name: og_rev_petrochemicals
+    new_type: double
+  - column_name: og_rev_pipelines_transp
+    new_type: double
+  - column_name: og_rev_refining
+    new_type: double
+  - column_name: og_rev_trading
+    new_type: double
+  - column_name: og_rev
+    new_type: double
+  - column_name: doi_oil_gas_rev
+    new_type: double
+  - column_name: oil_sands_potential_emissions
+    new_type: double
+  - column_name: oil_sands_reserves_volume
+    new_type: double
+  - column_name: shale_gas_potential_emissions
+    new_type: double
+  - column_name: shale_gas_reserves_volume
+    new_type: double
+  - column_name: shale_oil_gas_potential_emissions
+    new_type: double
+  - column_name: shale_oil_gas_reserves_volume
+    new_type: double
+  - column_name: shale_oil_potential_emissions
+    new_type: double
+  - column_name: shale_oil_reserves_volume
+    new_type: double
+  - column_name: unconv_oil_gas_potential_emissions
+    new_type: double
+  - column_name: unconv_oil_gas_reserves_volume
+    new_type: double
+  - column_name: conv_oil_reserves_key
+    new_type: double
+  - column_name: conv_oil_potential_emissions
+    new_type: double
+  - column_name: conv_oil_reserves_volume
+    new_type: double
+  - column_name: natural_gas_potential_emissions
+    new_type: double
+  - column_name: natural_gas_reserves_volume
+    new_type: double
+  - column_name: nat_gas_potential_emissions
+    new_type: double
+  - column_name: nat_gas_reserves_volume
+    new_type: double
+  - column_name: oil_nat_gas_potential_emissions
+    new_type: double
+  - column_name: oil_nat_gas_reserves_volume
+    new_type: double
+  - column_name: oil_potential_emissions
+    new_type: double
+  - column_name: oil_reserves_volume
+    new_type: double
+  - column_name: unconv_oil_gas_max_rev_pct
+    new_type: double
+  - column_name: conv_oil_gas_max_rev_pct
+    new_type: double
+  - column_name: shale_oil_max_rev_pct
+    new_type: double
+  - column_name: shale_gas_max_rev_pct
+    new_type: double
+  - column_name: arctic_oil_max_rev_pct
+    new_type: double
+  - column_name: arctic_gas_max_rev_pct
+    new_type: double
+  - column_name: carbon_emissions_year
+    new_type: integer
+  - column_name: carbon_emissions_scope_1
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_3yavg
+    new_type: double
+  - column_name: carbon_emissions_scope_12_industry_intensity
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten
+    new_type: double
+  - column_name: carbon_emissions_intensity_year
+    new_type: integer
+  - column_name: carbon_emissions_scope_2
+    new_type: double
+  - column_name: carbon_sales_intensity_recent
+    new_type: double
+  - column_name: carbon_emissions_scope_3
+    new_type: double
+  - column_name: carbon_emissions_scope_3_downstream_intensity_sales_recent
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream_intensity_sales_recent
+    new_type: double
+  - column_name: carbon_emissions_scope_3_downstream_report
+    new_type: double
+  - column_name: carbon_emissions_scope_3_down_sub_ind_emissions
+    new_type: double
+  - column_name: carbon_emissions_scope_3_down_sub_ind_intensity
+    new_type: double
+  - column_name: carbon_emissions_scope_3_downstream_year
+    new_type: integer
+  - column_name: carbon_emissions_scope_3_undefined_report
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream_report
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream_intensity_report
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream_tier1
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream_tier1_intensity
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream_intensity
+    new_type: double
+  - column_name: carbon_emissions_scope_3_upstream_year
+    new_type: integer
+  - column_name: marketcap_usd
+    new_type: double
+  - column_name: sales_usd_recent
+    new_type: double
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: file_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: msci_carbon_metrics

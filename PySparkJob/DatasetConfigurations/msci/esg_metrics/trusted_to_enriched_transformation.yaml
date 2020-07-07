@@ -1,0 +1,14 @@
+workflow_steps:
+  df_pipeline_esg_snapshot_read:
+  - filter_date_column: data_date
+  df_pipeline_derive_column:
+  - column_name: data_date
+    new_column_name: ym
+    expression:
+      name: df_extract_year_month
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: snapshot_date
+    catalog_db_name: df_enriched_${env}
+    catalog_table_name: msci_esg_metrics

@@ -1,0 +1,46 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: date
+    new_column_name: pit_date
+  - column_name: securityID
+    new_column_name: security_id
+  - column_name: fiscalYear
+    new_column_name: fiscal_year
+  - column_name: fiscalQuarter
+    new_column_name: fiscal_quarter
+  - column_name: item
+    new_column_name: capiq_item_id
+  - column_name: fiscalChainID
+    new_column_name: fiscal_chain_id
+  - column_name: periodEndDate
+    new_column_name: period_end_date
+  - column_name: filingDate
+    new_column_name: filing_date
+  - column_name: updateFlag
+    new_column_name: update_flag
+  - column_name: valueQ
+    new_column_name: value_quarterly
+  - column_name: valueS
+    new_column_name: value_semi_annual
+  - column_name: valueA
+    new_column_name: value_annual
+  - column_name: valueYTD
+    new_column_name: value_ytd
+  - column_name: valueLTM
+    new_column_name: value_ltm
+  - column_name: vendorDate
+    new_column_name: vendor_date
+  - column_name: formType
+    new_column_name: filing_form_type
+  df_pipeline_derive_column:
+  - column_name: df_meta_system_process_date
+    new_column_name: last_modified_time
+    expression:
+      name: df_constant
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: pas_de_qsrp_ciq_fundemental_overrides
+    output_path: s3://cppib-data-fabric-trusted-${env}/pas_de/pas_de_qsrp_ciq_fundemental_overrides

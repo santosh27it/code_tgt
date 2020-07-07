@@ -1,0 +1,39 @@
+workflow_steps:
+  df_pipeline_read:
+  df_pipeline_derive_column:
+  - new_column_name: Op
+    expression:
+      name: df_constant
+      arg: I
+  - column_name: financialcollectionid
+    new_column_name: df_meta_p_cppib
+    expression:
+      name: df_math_mode
+      arg: 8
+  - new_column_name: df_meta_epoch
+    expression:
+      name: df_constant
+      arg: 20200403120000
+  - new_column_name: df_meta_file_name
+    expression:
+      name: df_constant
+      arg: capiq_hist
+  - new_column_name: df_meta_run_date
+    expression:
+      name: df_constant
+      arg: 2020-04-03
+  - new_column_name: df_meta_job_id
+    expression:
+      name: df_constant
+      arg: 1111-1111-1111-1111
+  df_pipeline_column_type_conversion:
+  - column_name: df_meta_run_date
+    new_type: date
+  df_pipeline_upsert:
+  - hudi_table_name: ciq_ciqfincollection
+    catalog_db: df_trusted_${env}
+    record_keys: financialcollectionid
+    partition_keys: df_meta_p_cppib
+    precombine_field: df_meta_system_process_date
+    write_operation: bulk_insert
+

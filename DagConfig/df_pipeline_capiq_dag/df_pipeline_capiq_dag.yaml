@@ -1,0 +1,17 @@
+df_pipeline_capiq_dag:
+  description: "Dag for capiq file transformation from landing to vendor raw, and vendor raw to model raw"
+  tasks:
+    df_pipeline_ciq_entry_point:
+    df_pipeline_massage_header_footer:
+      dependencies: [df_pipeline_ciq_entry_point]
+    csv_to_parquet_landing_to_raw:
+      python_callable_name: df_pipeline_transformation
+      dependencies: [df_pipeline_massage_header_footer]
+    update_partition_in_raw_catalog:
+      python_callable_name: df_pipeline_update_raw_partition
+      dependencies: [csv_to_parquet_landing_to_raw]
+    raw_to_trusted_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [update_partition_in_raw_catalog]
+    df_pipeline_exit_point:
+      dependencies: [raw_to_trusted_transformation]

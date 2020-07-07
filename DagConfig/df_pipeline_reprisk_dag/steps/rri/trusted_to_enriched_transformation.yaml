@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/reprisk/rri/trusted_to_enriched_transformation.yaml
+  output_bucket: enriched

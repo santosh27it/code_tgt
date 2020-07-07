@@ -1,0 +1,15 @@
+df_pipeline_strategy_neutral_ciq_dag:
+  description: "CIQ Model Raw to Strategy Neutral DAG"
+  tasks:
+    df_pipeline_entry_point_lambda:
+    refine_and_upload_to_enriched_zone:
+      python_callable_name: df_pipeline_emr_job_transient_cluster
+      dependencies: [df_pipeline_entry_point_lambda]
+    job_emr_sensor:
+      operator: EmrSensor
+      provide_context: True
+      dependencies: [refine_and_upload_to_enriched_zone]
+    df_pipeline_trigger_awb:
+      dependencies: [job_emr_sensor]
+    df_pipeline_exit_point:
+      dependencies: [df_pipeline_trigger_awb]

@@ -1,0 +1,33 @@
+df_pipeline_iss_dag:
+  description: "ISS Transformation"
+  default_args:
+    retries: 3
+  tasks:
+    df_pipeline_entry_point_lambda:
+    df_pipeline_massage_header_footer:
+      dependencies: [df_pipeline_entry_point_lambda]
+    csv_to_parquet_landing_to_raw:
+      python_callable_name: df_pipeline_transformation
+      dependencies: [df_pipeline_massage_header_footer]
+    update_partition_in_raw_catalog:
+      python_callable_name: df_pipeline_update_raw_partition
+      dependencies: [csv_to_parquet_landing_to_raw]
+    raw_data_quality_check:
+      python_callable_name: df_pipeline_dq_check
+      dependencies: [update_partition_in_raw_catalog]
+    raw_to_trusted_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [update_partition_in_raw_catalog]
+    trusted_data_quality_check:
+      python_callable_name: df_pipeline_dq_check
+      dependencies: [raw_to_trusted_transformation]
+    trusted_to_enriched_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [raw_to_trusted_transformation]
+    enriched_snapshot_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [trusted_to_enriched_transformation]
+    df_pipeline_exit_point:
+      dependencies: [enriched_snapshot_transformation]
+    df_pipeline_exit_point_lambda:
+      dependencies: [df_pipeline_exit_point]

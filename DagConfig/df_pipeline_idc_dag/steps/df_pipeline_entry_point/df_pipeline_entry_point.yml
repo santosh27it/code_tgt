@@ -1,0 +1,5 @@
+properties:
+  # expected_datasets: [rri, company_identifiers]
+  expected_datasets: []
+  # s3_prefix: [idc/global/price_adjustment/df_pipeline_security_kenny]
+  # s3_prefix: [pas_de/security]

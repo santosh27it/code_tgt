@@ -1,0 +1,614 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: data_date
+  df_pipeline_column_type_conversion:
+  - column_name: carbon_emissions_score
+    new_type: double
+  - column_name: carbon_emissions_mgmt_score
+    new_type: double
+  - column_name: carbon_emissions_exp_score
+    new_type: double
+  - column_name: prod_carb_ftprnt_exp_score
+    new_type: double
+  - column_name: bus_exp_carbon_intensive_ops_nm
+    new_type: integer
+  - column_name: cbn_exp_stranded_ff_nm
+    new_type: integer
+  - column_name: geo_exp_carbon_regulation_nm
+    new_type: integer
+  - column_name: geo_exp_climate_chg_vul_regions_nm
+    new_type: integer
+  - column_name: bus_exp_carbon_inten_supply_chain_nm
+    new_type: integer
+  - column_name: carbon_emissions_high_risk_bus_pct
+    new_type: double
+  - column_name: carbon_emissions_med_risk_bus_pct
+    new_type: double
+  - column_name: carbon_emissions_high_risk_geo_pct
+    new_type: double
+  - column_name: carbon_emissions_med_risk_geo_pct
+    new_type: double
+  - column_name: climate_chg_vul_high_risk_geo_pct
+    new_type: double
+  - column_name: climate_chg_vul_med_risk_geo_pct
+    new_type: double
+  - column_name: prod_carb_ftprnt_high_risk_bus_pct
+    new_type: double
+  - column_name: prod_carb_ftprnt_med_risk_bus_pct
+    new_type: double
+  - column_name: contr_climate_chng_nm
+    new_type: integer
+  - column_name: contr_climate_chng_n_severe
+    new_type: integer
+  - column_name: contr_climate_chng_n_total
+    new_type: integer
+  - column_name: cbn_prog_reduc_op_emiss_nm
+    new_type: integer
+  - column_name: carbon_scope_12_inten_3y_avg_rel_peer_median_nm
+    new_type: integer
+  - column_name: cbn_energy_con_inten_3y_cagr_avg_nm
+    new_type: integer
+  - column_name: carbon_scope_12_inten_3y_trend_nm
+    new_type: integer
+  - column_name: cbn_renew_ener_use_nm
+    new_type: integer
+  - column_name: carbon_emissions_scope_1
+    new_type: double
+  - column_name: carbon_emissions_scope_12
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten
+    new_type: double
+  - column_name: carbon_emissions_intensity_year
+    new_type: date
+  - column_name: carbon_emissions_scope_2
+    new_type: double
+  - column_name: carbon_emissions_scope_3
+    new_type: double
+  - column_name: carbon_emissions_year
+    new_type: date
+  - column_name: carbon_scope_12_inten_3y_avg
+    new_type: double
+  - column_name: carbon_scope_12_inten_3y_gics_ind_peer_ratio
+    new_type: double
+  - column_name: carbon_scope_12_inten_3y_gic_cagr
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy16
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy16
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy16
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy16
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy16
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy15
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy15
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy15
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy15
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy15
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy14
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy14
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy14
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy14
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy14
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy13
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy13
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy13
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy13
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy13
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy12
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy12
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy12
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy12
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy12
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy11
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy11
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy11
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy11
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy11
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy10
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy10
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy10
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy10
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy10
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy09
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy09
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy09
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy09
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy09
+    new_type: double
+  - column_name: carbon_emissions_scope_1_fy08
+    new_type: double
+  - column_name: carbon_emissions_scope_2_fy08
+    new_type: double
+  - column_name: carbon_emissions_scope_3_fy08
+    new_type: double
+  - column_name: carbon_emissions_scope_12_fy08
+    new_type: double
+  - column_name: carbon_emissions_scope_12_inten_fy08
+    new_type: double
+  - column_name: cbn_reg_env_audits_nm
+    new_type: integer
+  - column_name: exec_oversight_env_nm
+    new_type: integer
+  - column_name: cbn_target_quant_reduc_nm
+    new_type: integer
+  - column_name: cbn_prog_low_carb_renew
+    new_type: date
+  - column_name: cbn_evidence_targ_energy_improv
+    new_type: date
+  - column_name: exec_body_env_issues
+    new_type: date
+  - column_name: cbn_reg_energy_audits
+    new_type: date
+  - column_name: cbn_prog_redu_carb_core_op
+    new_type: date
+  - column_name: cbn_prog_redu_carb_core_op_source
+    new_type: date
+  - column_name: cbn_prog_low_carb_renew_source
+    new_type: date
+  - column_name: cbn_evidence_targ_energy_improv_source
+    new_type: date
+  - column_name: source_exec_body_env_issues
+    new_type: date
+  - column_name: cbn_reg_energy_audits_source
+    new_type: date
+  - column_name: biodiv_land_use_exp_score
+    new_type: double
+  - column_name: water_stress_score
+    new_type: double
+  - column_name: water_stress_mgmt_score
+    new_type: double
+  - column_name: water_stress_exp_score
+    new_type: double
+  - column_name: bus_exp_land_eco_disturbance_nm
+    new_type: integer
+  - column_name: bus_exp_water_intensive_ops_nm
+    new_type: integer
+  - column_name: geo_exp_fragile_eco_nm
+    new_type: integer
+  - column_name: geo_exp_water_stress_regions_nm
+    new_type: integer
+  - column_name: water_stress_high_risk_geo_pct
+    new_type: double
+  - column_name: water_stress_med_risk_geo_pct
+    new_type: double
+  - column_name: biodiv_land_use_high_risk_bus_pct
+    new_type: double
+  - column_name: water_stress_high_risk_bus_pct
+    new_type: double
+  - column_name: biodiv_land_use_med_risk_bus_pct
+    new_type: double
+  - column_name: water_stress_med_risk_bus_pct
+    new_type: double
+  - column_name: biodiv_land_use_high_risk_geo_pct
+    new_type: double
+  - column_name: biodiv_land_use_med_risk_geo_pct
+    new_type: double
+  - column_name: contr_env_impact_nm
+    new_type: integer
+  - column_name: contr_env_investment_nm
+    new_type: integer
+  - column_name: contr_impact_ecosystems_nm
+    new_type: integer
+  - column_name: contr_raw_material_nm
+    new_type: integer
+  - column_name: contr_water_nm
+    new_type: integer
+  - column_name: contr_env_impact_n_severe
+    new_type: integer
+  - column_name: contr_env_investment_n_severe
+    new_type: integer
+  - column_name: contr_impact_ecosystems_n_severe
+    new_type: integer
+  - column_name: contr_raw_material_n_severe
+    new_type: integer
+  - column_name: contr_water_n_severe
+    new_type: integer
+  - column_name: contr_env_impact_n_total
+    new_type: integer
+  - column_name: contr_env_investment_n_total
+    new_type: integer
+  - column_name: contr_impact_ecosystems_n_total
+    new_type: integer
+  - column_name: contr_raw_material_n_total
+    new_type: integer
+  - column_name: contr_water_n_total
+    new_type: integer
+  - column_name: water_fresh_con_inten_3y_avg_rel_gics_nm
+    new_type: integer
+  - column_name: water_fresh_wd_inten_3y_avg_rel_gics_nm
+    new_type: integer
+  - column_name: water_fresh_con_inten_3y_trend_nm
+    new_type: integer
+  - column_name: water_fresh_wd_inten_3y_trend_nm
+    new_type: integer
+  - column_name: water_fresh_con_inten_3y_gics_ind_peer_ratio
+    new_type: double
+  - column_name: water_fresh_wd_inten_3y_avg_gics
+    new_type: double
+  - column_name: water_fresh_con_inten_3y_cagr
+    new_type: double
+  - column_name: water_fresh_wd_inten_3y_cagr
+    new_type: double
+  - column_name: exec_oversight_water_nm
+    new_type: integer
+  - column_name: water_op_reduct_targets_nm
+    new_type: integer
+  - column_name: water_risk_monitoring_nm
+    new_type: integer
+  - column_name: water_reduct_prog_operations_nm
+    new_type: integer
+  - column_name: water_reduct_prog_supplychain_nm
+    new_type: integer
+  - column_name: toxic_emiss_wste_exp_score
+    new_type: double
+  - column_name: bus_exp_packaging_waste_nm
+    new_type: integer
+  - column_name: bus_exp_toxic_emiss_waste_nm
+    new_type: integer
+  - column_name: toxic_emiss_high_risk_bus_pct
+    new_type: double
+  - column_name: toxic_emiss_med_risk_bus_pct
+    new_type: double
+  - column_name: pack_mat_waste_high_risk_bus_pct
+    new_type: double
+  - column_name: pack_mat_waste_med_risk_bus_pct
+    new_type: double
+  - column_name: contr_toxic_emiss_waste_nm
+    new_type: integer
+  - column_name: contr_toxic_emiss_waste_n_severe
+    new_type: integer
+  - column_name: contr_toxic_emiss_waste_n_total
+    new_type: integer
+  - column_name: alternative_energy_nm
+    new_type: integer
+  - column_name: energy_efficiency_nm
+    new_type: integer
+  - column_name: green_building_nm
+    new_type: integer
+  - column_name: pollution_prevention_nm
+    new_type: integer
+  - column_name: sustainable_water_nm
+    new_type: integer
+  - column_name: labor_mgmt_score
+    new_type: double
+  - column_name: labor_mgmt_mgmt_score
+    new_type: double
+  - column_name: labor_mgmt_exp_score
+    new_type: double
+  - column_name: human_capital_dev_score
+    new_type: double
+  - column_name: human_capital_dev_mgmt_score
+    new_type: double
+  - column_name: human_capital_dev_exp_score
+    new_type: double
+  - column_name: hlth_safety_exp_score
+    new_type: double
+  - column_name: labor_exp_footprint_score
+    new_type: double
+  - column_name: bus_exp_injury_prone_ops_nm
+    new_type: integer
+  - column_name: bus_exp_labor_intensive_ops_nm
+    new_type: integer
+  - column_name: geo_exp_frequent_work_stoppages_nm
+    new_type: integer
+  - column_name: geo_exp_poor_workplace_safety_nm
+    new_type: integer
+  - column_name: major_layoffs_mergers_nm
+    new_type: integer
+  - column_name: workforce_part_time_over_20pct_nm
+    new_type: integer
+  - column_name: bus_exp_highly_skilled_workforce_nm
+    new_type: integer
+  - column_name: human_capital_dev_med_risk_bus_pct
+    new_type: double
+  - column_name: human_capital_dev_high_risk_bus_pct
+    new_type: double
+  - column_name: labor_mgmt_high_risk_bus_pct
+    new_type: double
+  - column_name: labor_mgmt_med_risk_bus_pct
+    new_type: double
+  - column_name: hlth_safety_high_risk_bus_pct
+    new_type: double
+  - column_name: hlth_safety_med_risk_bus_pct
+    new_type: double
+  - column_name: labor_mgmt_high_risk_geo_pct
+    new_type: double
+  - column_name: hlth_safety_high_risk_geo_pct
+    new_type: double
+  - column_name: labor_mgmt_med_risk_geo_pct
+    new_type: double
+  - column_name: hlth_safety_med_risk_geo_pct
+    new_type: double
+  - column_name: workforce_total
+    new_type: integer
+  - column_name: contr_collective_barg_nm
+    new_type: integer
+  - column_name: contr_controversial_workplace_nm
+    new_type: integer
+  - column_name: contr_discrimination_div_nm
+    new_type: integer
+  - column_name: contr_health_safety_nm
+    new_type: integer
+  - column_name: contr_supply_chain_labor_nm
+    new_type: integer
+  - column_name: contr_collective_barg_n_severe
+    new_type: integer
+  - column_name: contr_health_safety_n_severe
+    new_type: integer
+  - column_name: contr_controversial_workplace_n_severe
+    new_type: integer
+  - column_name: contr_discrimination_div_n_severe
+    new_type: integer
+  - column_name: contr_supply_chain_labor_n_severe
+    new_type: integer
+  - column_name: contr_collective_barg_n_total
+    new_type: integer
+  - column_name: contr_health_safety_n_total
+    new_type: integer
+  - column_name: contr_controversial_workplace_n_total
+    new_type: integer
+  - column_name: contr_discrimination_div_n_total
+    new_type: integer
+  - column_name: contr_supply_chain_labor_n_total
+    new_type: integer
+  - column_name: collective_barg_agreement_nm
+    new_type: integer
+  - column_name: diversity_workf_policy_nm
+    new_type: integer
+  - column_name: monitor_emp_satisfaction_nm
+    new_type: integer
+  - column_name: non_comp_benefits_nm
+    new_type: integer
+  - column_name: labor_policy_intl_recognized_nm
+    new_type: integer
+  - column_name: diversity_programs_nm
+    new_type: integer
+  - column_name: prof_leader_dev_train_nm
+    new_type: integer
+  - column_name: labor_mgmt_pct_workforce_collective_agreements
+    new_type: double
+  - column_name: privacy_data_sec_score
+    new_type: double
+  - column_name: privacy_data_sec_mgmt_score
+    new_type: double
+  - column_name: privacy_data_sec_exp_score
+    new_type: double
+  - column_name: chem_safety_exp_score
+    new_type: double
+  - column_name: prod_sfty_quality_exp_score
+    new_type: double
+  - column_name: bus_exp_data_breaches_nm
+    new_type: integer
+  - column_name: bus_exp_product_safety_risks_nm
+    new_type: integer
+  - column_name: geo_exp_chemical_safety_nm
+    new_type: integer
+  - column_name: geo_exp_privacy_regulations_nm
+    new_type: integer
+  - column_name: bus_exp_high_concern_chemicals_nm
+    new_type: integer
+  - column_name: privacy_data_sec_high_risk_bus_pct
+    new_type: double
+  - column_name: privacy_data_sec_med_risk_bus_pct
+    new_type: double
+  - column_name: privacy_data_sec_high_risk_geo_pct
+    new_type: double
+  - column_name: privacy_data_sec_med_risk_geo_pct
+    new_type: double
+  - column_name: chem_safety_high_risk_geo_pct
+    new_type: double
+  - column_name: chem_safety_med_risk_geo_pct
+    new_type: double
+  - column_name: prod_sfty_quality_high_risk_bus_pct
+    new_type: double
+  - column_name: prod_sfty_quality_med_risk_bus_pct
+    new_type: double
+  - column_name: chem_safety_high_risk_bus_pct
+    new_type: double
+  - column_name: chem_safety_med_risk_bus_pct
+    new_type: double
+  - column_name: contr_chem_safe_nm
+    new_type: integer
+  - column_name: contr_customer_fraud_nm
+    new_type: integer
+  - column_name: contr_data_security_nm
+    new_type: integer
+  - column_name: contr_discriminatory_access_nm
+    new_type: integer
+  - column_name: contr_marketing_nm
+    new_type: integer
+  - column_name: contr_product_safe_nm
+    new_type: integer
+  - column_name: contr_chem_safe_n_severe
+    new_type: integer
+  - column_name: contr_customer_fraud_n_severe
+    new_type: integer
+  - column_name: contr_data_security_n_severe
+    new_type: integer
+  - column_name: contr_discriminatory_access_n_severe
+    new_type: integer
+  - column_name: contr_marketing_n_severe
+    new_type: integer
+  - column_name: contr_product_safe_n_severe
+    new_type: integer
+  - column_name: contr_chem_safe_n_total
+    new_type: integer
+  - column_name: contr_customer_fraud_n_total
+    new_type: integer
+  - column_name: contr_data_security_n_total
+    new_type: integer
+  - column_name: contr_marketing_n_total
+    new_type: integer
+  - column_name: contr_discriminatory_access_n_total
+    new_type: integer
+  - column_name: contr_product_safe_n_total
+    new_type: integer
+  - column_name: audits_esg_performance_nm
+    new_type: integer
+  - column_name: data_sec_risk_train_nm
+    new_type: integer
+  - column_name: exec_oversight_priv_data_sec_nm
+    new_type: integer
+  - column_name: priv_data_security_process_nm
+    new_type: integer
+  - column_name: contr_impact_community_nm
+    new_type: integer
+  - column_name: contr_soc_impact_raw_mat_nm
+    new_type: integer
+  - column_name: contr_impact_community_n_severe
+    new_type: integer
+  - column_name: contr_impact_community_n_total
+    new_type: integer
+  - column_name: contr_soc_impact_raw_mat_n_severe
+    new_type: integer
+  - column_name: contr_soc_impact_raw_mat_n_total
+    new_type: integer
+  - column_name: corruption_inst_score
+    new_type: double
+  - column_name: corruption_inst_mgmt_score
+    new_type: double
+  - column_name: corruption_inst_exp_score
+    new_type: double
+  - column_name: bus_ethics_fraud_score
+    new_type: double
+  - column_name: bus_ethics_fraud_mgmt_score
+    new_type: double
+  - column_name: anticomp_pract_score
+    new_type: double
+  - column_name: anticomp_pract_mgmt_score
+    new_type: double
+  - column_name: tax_transp_score
+    new_type: double
+  - column_name: bus_exp_corrupt_practices_ops_nm
+    new_type: integer
+  - column_name: geo_exp_corrupt_instability_nm
+    new_type: integer
+  - column_name: gov_contr_rev_over_20pct_nm
+    new_type: integer
+  - column_name: gov_owner_over_20pct_nm
+    new_type: integer
+  - column_name: corruption_inst_high_risk_bus_pct
+    new_type: double
+  - column_name: corruption_inst_high_risk_geo_pct
+    new_type: double
+  - column_name: corruption_inst_med_risk_bus_pct
+    new_type: double
+  - column_name: corruption_inst_med_risk_geo_pct
+    new_type: double
+  - column_name: contr_anti_comp_nm
+    new_type: integer
+  - column_name: contr_brib_corrupt_nm
+    new_type: integer
+  - column_name: contr_ethics_nm
+    new_type: integer
+  - column_name: contr_human_rights_nm
+    new_type: integer
+  - column_name: contr_tax_subsidies_nm
+    new_type: integer
+  - column_name: contr_anti_comp_n_severe
+    new_type: integer
+  - column_name: contr_anti_comp_n_total
+    new_type: integer
+  - column_name: contr_brib_corrupt_n_severe
+    new_type: integer
+  - column_name: contr_brib_corrupt_n_total
+    new_type: integer
+  - column_name: contr_ethics_n_severe
+    new_type: integer
+  - column_name: contr_ethics_n_total
+    new_type: integer
+  - column_name: contr_human_rights_n_severe
+    new_type: integer
+  - column_name: contr_human_rights_n_total
+    new_type: integer
+  - column_name: contr_tax_subsidies_n_severe
+    new_type: integer
+  - column_name: contr_tax_subsidies_n_total
+    new_type: integer
+  - column_name: foreign_market_revenue_nm
+    new_type: integer
+  - column_name: tax_gap_over_20_nm
+    new_type: integer
+  - column_name: estimated_effective_tax_rate
+    new_type: double
+  - column_name: estimated_statutory_tax_rate
+    new_type: double
+  - column_name: estimated_tax_gap
+    new_type: double
+  - column_name: foreign_revenue_percentage
+    new_type: double
+  - column_name: bribe_anti_corr_policy_nm
+    new_type: integer
+  - column_name: collab_supplier_corr_issues_nm
+    new_type: integer
+  - column_name: regularly_audits_ethics_nm
+    new_type: integer
+  - column_name: exec_oversight_corr_nm
+    new_type: integer
+  - column_name: human_right_policy_nm
+    new_type: integer
+  - column_name: monitor_supplier_corr_pol_nm
+    new_type: integer
+  - column_name: monitor_human_rights_policy_nm
+    new_type: integer
+  - column_name: philanthropic_invest_align_nm
+    new_type: integer
+  - column_name: un_global_comp_signatory_nm
+    new_type: integer
+  - column_name: whistleblower_protect_policy_nm
+    new_type: integer
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      date_key: data_date
+      join_maps: "issuer_isin: isin, issuer_cusip: cusip, issuer_sedol: sedol"
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "issuer_isin: id_isin, issuer_cusip: id_cusip, issuer_sedol: id_sedol"
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: data_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: msci_esg_metrics

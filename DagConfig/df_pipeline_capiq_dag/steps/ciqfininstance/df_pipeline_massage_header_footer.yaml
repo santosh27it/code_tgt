@@ -1,0 +1,2 @@
+properties:
+  column_head: 'op,financialinstanceid,financialperiodid,periodenddate,filingdate,latestforfinancialperiodflag,latestfilingforinstanceflag,amendmentflag,currencyid,accessionnumber,formtype,restatementtypeid,instancetypeid,isrestatementtypeid,bsrestatementtypeid,cfrestatementtypeid,documentid'

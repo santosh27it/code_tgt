@@ -1,0 +1,26 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: date
+    new_column_name: date_
+  df_pipeline_column_type_conversion:
+  - column_name: date_
+    new_type: date
+  - column_name: code
+    new_type: integer
+  - column_name: shares
+    new_type: double
+  df_pipeline_derive_column:
+  - new_column_name: run_date
+    expression:
+      name: df_constant
+      arg: '2020-03-15'
+  - column_name: date_
+    new_column_name: year
+    expression:
+      name: df_get_year
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: idc_global_price_share

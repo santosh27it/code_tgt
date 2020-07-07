@@ -1,0 +1,3 @@
+properties:
+  decryption_algorithm: des
+  secret_key: /df-pipeline/bloomberg/equity/key

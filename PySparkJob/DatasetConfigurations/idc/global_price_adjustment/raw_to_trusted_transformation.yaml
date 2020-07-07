@@ -1,0 +1,18 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_column_type_conversion:
+  - column_name: code
+    new_type: integer
+  - column_name: rate
+    new_type: double
+  - column_name: factor
+    new_type: double
+  - column_name: startdate
+    new_type: date
+  - column_name: enddate
+    new_type: date
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: idc_global_price_adjustment

@@ -1,0 +1,43 @@
+properties:
+  transformation_seed:
+    s3://cppib-data-fabric-sandbox/users/alan/emr/datatransform.zip
+  transformation_list:
+    [trailing_sum, tbsa, latest,trailing_sum_annual_flow]
+  security_id_start:
+    100000000
+  security_id_end:
+    200000000
+  item_id:
+    [1, 100]
+  bucket_seed:
+    60
+  name:
+    fundemental_execution
+  transformation_table:
+    cmf_configs.fundamental_transform2
+  input_path:
+    s3://cppib-data-fabric-sandbox/data/cmf_seed_data/ciq_fundamental_compact
+  time_hint:
+    '2020-01-13'
+  output_path:
+    s3://cppib-data-fabric-sandbox/users/edwin/run_2
+  run_model:
+    daily
+  mode:
+    upsert
+  submission_script:
+    s3://cppib-data-fabric-sandbox/users/edwin/scripts/awb_fundemental_run.py
+  database:
+    df_enriched_dev
+  table:
+    fundemental_transformed
+  record_key:
+    transform_name,item,security_id
+  partition_path:
+    pit_date
+  transient_cluster:
+    true
+  transformation_type:
+    pyspark
+  cluster_name:
+    fundamental_transformation

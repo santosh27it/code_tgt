@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/truvalue/insight/trusted_to_enriched_transformation.yaml
+  output_bucket: enriched

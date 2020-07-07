@@ -1,0 +1,43 @@
+# format of this file
+# datasource or datasource.dataset
+# Notes: Datasource and dataset need to be register with configuration service first in order
+# for the dag dependency to work.
+# [datasource.dataset, datasource]
+# explicit_trigger: dag need to ne triggered explicity
+
+# Open business requirment/ feature improvement
+# 1: Current design we will trigger the downstream (when trigger_explicit == true) multiple time given
+# the circumstance that all upstream had been landed and subset of the upstream redroped multi-time,
+# then the down stream will be trigger multiple times.
+
+df_pipeline_strategy_neutral_equity_pricing_dag:
+  upstream: [bloomberg.equity_asia1, bloomberg.equity_asia2, bloomberg.equity_namr, bloomberg.equity_lamr, bloomberg.equity_euro, idc, publisher.fx_rate, publisher.holiday_calendar, publisher.id_mapping, publisher.security, publisher.equity_pricing_corrections]
+  trigger_explicit: true
+capiq.qsrp_ciq_fundamental:
+  upstream: [publisher.id_mapping]
+bloomberg:
+  upstream: [publisher.security]
+iss.gqs_scores:
+  upstream: [publisher.security, publisher.id_mapping, iss.gqs_metadata]
+iss.gqs_answers:
+  upstream: [publisher.security, publisher.id_mapping, iss.gqs_metadata]
+iss.director_data:
+  upstream: [publisher.security, publisher.id_mapping]
+iss.eva:
+  upstream: [publisher.security, publisher.id_mapping]
+msci.esg_metrics:
+  upstream: [publisher.security, publisher.id_mapping]
+msci.esg_ratings:
+  upstream: [publisher.security, publisher.id_mapping]
+msci.esg_underlying_segment:
+  upstream: [publisher.security, publisher.id_mapping]
+refinitiv:
+  upstream: [publisher.security, publisher.id_mapping]
+truvalue.insight:
+  upstream: [publisher.security, publisher.id_mapping, truvalue.tvlid_mapping]
+truvalue.ttm_volume:
+  upstream: [publisher.security, publisher.id_mapping, truvalue.tvlid_mapping]
+truvalue.momentum:
+  upstream: [publisher.security, publisher.id_mapping, truvalue.tvlid_mapping]
+reprisk:
+  upstream: [publisher.security, publisher.id_mapping]

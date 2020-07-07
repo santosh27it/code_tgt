@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/ciq/ciq_data_item/raw_to_trusted_transformation.yaml
+  output_bucket: trusted

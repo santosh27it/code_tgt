@@ -1,0 +1,113 @@
+workflow_steps:
+#  df_pipeline_ciq_fundamental_upsert:
+#  - hudi_table_name: qsrp_capiq_fundamental
+#    catalog_db: df_enriched_${env}
+#    precombine_field: last_modified_time
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: securityID
+    new_column_name: security_id
+  - column_name: fiscalYear
+    new_column_name: fiscal_year
+  - column_name: fiscalQuarter
+    new_column_name: fiscal_quarter
+  - column_name: Item
+    new_column_name: capiq_item_id
+  - column_name: fiscalChainID
+    new_column_name: fiscal_chain_id
+  - column_name: periodEndDate
+    new_column_name: period_end_date
+  - column_name: filingDate
+    new_column_name: filing_date
+  - column_name: updateFlag
+    new_column_name: filing_status_flag
+  - column_name: valueQ
+    new_column_name: value_quarterly
+  - column_name: valueS
+    new_column_name: value_semi_annual
+  - column_name: valueA
+    new_column_name: value_annual
+  - column_name: valueYTD
+    new_column_name: value_ytd
+  - column_name: valueLTM
+    new_column_name: value_ltm
+  - column_name: vendorDate
+    new_column_name: vendor_date
+  - column_name: formType
+    new_column_name: filing_form_type
+  - column_name: gaapType
+    new_column_name: accounting_standard_type
+  - column_name: date
+    new_column_name: pit_date
+  df_pipeline_derive_column:
+    - new_column_name: company_id
+      expression:
+        name: df_constant
+        arg: 'null'
+    - column_name: df_meta_system_process_date
+      new_column_name: last_modified_time
+      expression:
+        name: df_format_date
+        arg:
+          - '%Y-%m-%d %H:%M:%S.%f'
+          - True
+  df_pipeline_column_type_conversion:
+  - column_name: company_id
+    new_type: bigint
+  - column_name: security_id
+    new_type: bigint
+  - column_name: fiscal_year
+    new_type: integer
+  - column_name: fiscal_quarter
+    new_type: integer
+  - column_name: capiq_item_id
+    new_type: integer
+  - column_name: fiscal_chain_id
+    new_type: integer
+  - column_name: period_end_date
+    new_type: date
+  - column_name: filing_date
+    new_type: date
+  - column_name: currency
+    new_type: string
+  - column_name: filing_status_flag
+    new_type: integer
+  - column_name: value_quarterly
+    new_type: double
+  - column_name: value_semi_annual
+    new_type: double
+  - column_name: value_annual
+    new_type: double
+  - column_name: value_ytd
+    new_type: double
+  - column_name: value_ltm
+    new_type: double
+  - column_name: vendor_date
+    new_type: date
+  - column_name: filing_form_type
+    new_type: string
+  - column_name: accounting_standard_type
+    new_type: string
+  - column_name: pit_date
+    new_type: string
+  - column_name: last_modified_time
+    new_type: int
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: pit_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: pas_de_ciq_fundamental_final_correction
+    output_path: s3://cppib-data-fabric-trusted-${env}/pas_de/pas_de_ciq_fundamental_final_correction
+    return_df: True
+  df_pipeline_drop:
+  - columns: ['df_meta_system_process_date','df_meta_job_id','df_meta_run_date','df_meta_extracted_date','df_meta_file_name','df_meta_epoch']
+  df_pipeline_upsert:
+  - hudi_table_name: qsrp_capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    filter: overrideType != 'del'
+    operation_column: overrideType
+    output_path: s3://cppib-data-fabric-enriched-${env}/qsrp_ciq_fundamental/qsrp_ciq_fundamental

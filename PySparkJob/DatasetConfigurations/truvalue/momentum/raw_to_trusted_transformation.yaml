@@ -1,0 +1,95 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  df_pipeline_derive_column:
+  - column_name: date
+    new_column_name: date
+    expression:
+      name: df_format_date
+      arg: '%m/%d/%y'
+  df_pipeline_column_type_conversion:
+  - column_name: date
+    new_type: date
+  - column_name: allcategories_momentum
+    new_type: double
+  - column_name: materiality_momentum
+    new_type: double
+  - column_name: accessandaffordability_momentum
+    new_type: double
+  - column_name: airquality_momentum
+    new_type: double
+  - column_name: businessethics_momentum
+    new_type: double
+  - column_name: businessmodelresilience_momentum
+    new_type: double
+  - column_name: competitivebehavior_momentum
+    new_type: double
+  - column_name: criticalincidentriskmanagement_momentum
+    new_type: double
+  - column_name: customerprivacy_momentum
+    new_type: double
+  - column_name: customerwelfare_momentum
+    new_type: double
+  - column_name: datasecurity_momentum
+    new_type: double
+  - column_name: ecologicalimpacts_momentum
+    new_type: double
+  - column_name: employeeengagementdiversityandinclusion_momentum
+    new_type: double
+  - column_name: employeehealthandsafety_momentum
+    new_type: double
+  - column_name: energymanagement_momentum
+    new_type: double
+  - column_name: ghgemissions_momentum
+    new_type: double
+  - column_name: humanrightsandcommunityrelations_momentum
+    new_type: double
+  - column_name: laborpractices_momentum
+    new_type: double
+  - column_name: managementofthelegalandregulatoryenvironment_momentum
+    new_type: double
+  - column_name: materialssourcingandefficiency_momentum
+    new_type: double
+  - column_name: physicalimpactsofclimatechange_momentum
+    new_type: double
+  - column_name: productdesignandlifecyclemanagement_momentum
+    new_type: double
+  - column_name: productqualityandsafety_momentum
+    new_type: double
+  - column_name: sellingpracticesandproductlabeling_momentum
+    new_type: double
+  - column_name: supplychainmanagement_momentum
+    new_type: double
+  - column_name: systemicriskmanagement_momentum
+    new_type: double
+  - column_name: wasteandhazardousmaterialsmanagement_momentum
+    new_type: double
+  - column_name: waterandwastewatermanagement_momentum
+    new_type: double
+  df_pipeline_lookup:
+  - glue:
+      catalog_db: df_trusted_${env}
+      catalog_table: truvalue_tvlid_mapping
+      catalog_filter: file_date = :run_date
+    join_type: left
+    join_maps: [organizationtvlid, instrumenttvlid, file_date]
+    join_filter:
+    outputs: ['left_df.*', 'right_df.organizationname','right_df.isin']
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      date_key: file_date
+      join_maps: "isin: isin"
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "isin: id_isin"
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: file_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: truvalue_momentum

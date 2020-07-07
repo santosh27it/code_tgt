@@ -1,0 +1,21 @@
+properties:
+  AWB_HOST: 
+    uat: http://df-awb-pipeline-uat-5168a1ff569e3afa.elb.us-east-1.amazonaws.com
+    prod: http://df-awb-lb-a36ac23e5834e2c2.elb.us-east-1.amazonaws.com
+  AWB_PORT:
+    prod: 8080
+  AWB_DAGS: qsrp_fundamental_transforms
+  # AWB_AIRFLOW_TOKEN:
+  AWB_PAYLOAD:
+    uat:
+      user: uat_user
+      df_request:
+        sender: "Data Fabric Data Factory"
+        envs:
+          DF_USER_STORAGE_ROOT: "s3://cppib-data-fabric-sandbox/users/uat_user"
+    prod:
+      user: prod
+      df_request:
+        sender: "Data Fabric Data Factory"
+        envs:
+          DF_USER_STORAGE_ROOT: "s3://cppib-data-fabric-awb-prod/users/prod"

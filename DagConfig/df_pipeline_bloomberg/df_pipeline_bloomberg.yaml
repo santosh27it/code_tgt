@@ -1,0 +1,29 @@
+df_pipeline_bloomberg:
+  description: "Dag for fx file transformation"
+  default_args:
+    retries: 3
+  max_active_runs: 1
+  tasks:
+    df_pipeline_entry_point_lambda:
+    df_pipeline_decrypt:
+      dependencies: [df_pipeline_entry_point_lambda]
+    df_pipeline_unzip:
+      dependencies: [df_pipeline_decrypt]
+    df_pipeline_extract_data:
+      dependencies: [df_pipeline_unzip]
+    df_pipeline_massage_header_footer:
+      dependencies: [df_pipeline_extract_data]
+    csv_to_parquet_landing_to_raw:
+      python_callable_name: df_pipeline_transformation
+      dependencies: [df_pipeline_massage_header_footer]
+    update_partition_in_raw_catalog:
+      python_callable_name: df_pipeline_update_raw_partition
+      dependencies: [csv_to_parquet_landing_to_raw]
+    raw_to_trusted_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [update_partition_in_raw_catalog]
+    trusted_to_enriched_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [raw_to_trusted_transformation]
+    df_pipeline_exit_point_lambda:
+      dependencies: [trusted_to_enriched_transformation]

@@ -1,0 +1,85 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_derive_column:
+  - column_name: df_meta_pricing_date
+    new_column_name: ym
+    expression:
+      name: df_extract_year_month
+  - column_name: df_meta_pricing_date
+    new_column_name: pricing_date
+  - new_column_name: off_on_exch_volume
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: exch_sub_mkt_grp
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: mkt_of_ref_info
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: place_of_settlement
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: group_name_static
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: place_of_settlement
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_off_exch_volume
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  df_pipeline_column_type_conversion:
+  - column_name: pricing_date
+    new_type: date
+  - column_name: px_bid
+    new_type: double
+  - column_name: px_mid
+    new_type: double
+  - column_name: px_ask
+    new_type: double
+  - column_name: px_open
+    new_type: double
+  - column_name: px_high
+    new_type: double
+  - column_name: px_low
+    new_type: double
+  - column_name: px_last
+    new_type: double
+  df_pipeline_lookup:
+  - glue:
+      catalog_db: df_trusted_${env}
+      catalog_table: 'pas_de_security_equity'
+      catalog_filter: df_meta_run_date = :run_date
+    join_type: left
+    join_maps: "id_bb_unique: id_bb_unique, df_meta_run_date: df_meta_run_date"
+    join_filter: "left_df.id_bb_unique is not null"
+    outputs: ['left_df.*', 'right_df.cppib_sec_id']
+    partition_columns: [left_df.id_bb_unique,security_description,id_bb_sec_num_des]
+    partition_order_asc: cppib_sec_id
+    partition_order_desc: primary_flg
+    partition_method: row_number
+    partition_keep_rows: 1
+  df_pipeline_upsert:
+  - hudi_table_name: bbg_equity_pricing
+    catalog_db: df_trusted_${env}
+    record_keys: pricing_date,id_bb_unique,exch_code,df_meta_file_name
+    partition_keys: ym
+    precombine_field: df_meta_system_process_date
+    prune_ranges: false
+    record_size: 10
+    memory_max_merge_size: 2004857600000
+    output_path: s3://cppib-data-fabric-trusted-${env}/bloomberg/bbg_equity_pricing

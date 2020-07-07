@@ -1,0 +1,6 @@
+properties:
+  config_path: Pipeline/PysparkJob/ciq/ciq_fin_collection_data/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  driver_memory: 4096m
+  number_executors: 10
+

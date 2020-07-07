@@ -1,0 +1,33 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_derive_column:
+  - new_column_name: df_meta_p_cppib
+    expression:
+      name: df_constant
+      arg: p
+  df_pipeline_column_type_conversion:
+  - column_name: tradingitemid
+    new_type: integer
+  - column_name: securityid
+    new_type: integer
+  - column_name: exchangeid
+    new_type: integer
+  - column_name: currencyid
+    new_type: integer
+  - column_name: tradingitemstatusid
+    new_type: integer
+  - column_name: primaryflag
+    new_type: integer
+  - column_name: df_meta_run_date
+    new_type: date
+  df_pipeline_upsert_delete:
+  - hudi_table_name: ciq_ciqtradingitem
+    catalog_db: df_trusted_${env}
+    record_keys: tradingitemid
+    partition_keys: df_meta_p_cppib
+    precombine_field: df_meta_system_process_date
+    del_filter: op='D'
+    record_size: 20
+    memory_max_merge_size: 2004857600000
+    select_cols: [tradingitemid,securityid,tickersymbol,exchangeid,currencyid,tradingitemstatusid,primaryflag,op,df_meta_epoch,df_meta_file_name,df_meta_run_date,df_meta_job_id,df_meta_p_cppib]
+    output_path: s3://cppib-data-fabric-trusted-${env}/ciq/ciq_fin_tradingitem

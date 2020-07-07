@@ -1,0 +1,336 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  - column_name: financial_year
+    new_column_name: fiscal_year
+  - column_name: gics_sub_industry_code
+    new_column_name: gics_subindustry_code
+  - column_name: gics_sub_industry_name
+    new_column_name: gics_subindustry_name
+  - column_name: carbon_scope_1_tonnes_co2e
+    new_column_name: carbon_scope1
+  - column_name: carbon_scope_2_tonnes_co2e
+    new_column_name: carbon_scope2
+  - column_name: carbon_scope_3_tonnes_co2e
+    new_column_name: carbon_scope3
+  - column_name: carbon_direct_tonnes_co2e
+    new_column_name: carbon_direct
+  - column_name: carbon_first_tier_indirect_tonnes_co2e
+    new_column_name: carbon_first_tier_indirect
+  - column_name: carbon_direct_first_tier_indirect_tonnes_co2e
+    new_column_name: carbon_direct_plus_first_tier_indirect
+  - column_name: water_direct_cooling_cubic_meter
+    new_column_name: water_direct_cooling
+  - column_name: water_direct_process_cubic_meter
+    new_column_name: water_direct_process
+  - column_name: water_purchased_cubic_meter
+    new_column_name: water_purchased
+  - column_name: water_direct_purchased_cubic_meter
+    new_column_name: water_direct_plus_purchased
+  - column_name: waste_landfill_tonnes
+    new_column_name: waste_landfill
+  - column_name: waste_incineration_tonnes
+    new_column_name: waste_incineration
+  - column_name: waste_nuclear_tonnes
+    new_column_name: waste_nuclear
+  - column_name: waste_recycled_tonnes
+    new_column_name: waste_recycled
+  - column_name: carbon_intensity_scope_1_tonnes_co2e_usd_mn
+    new_column_name: carbon_inten_scope1
+  - column_name: carbon_intensity_scope_2_tonnes_co2e_usd_mn
+    new_column_name: carbon_inten_scope2
+  - column_name: carbon_intensity_scope_3_tonnes_co2e_usd_mn
+    new_column_name: carbon_inten_scope3
+  - column_name: carbon_intensity_direct_tonnes_co2e_usd_mn
+    new_column_name: carbon_inten_direct
+  - column_name: carbon_intensity_first_tier_indirect_tonnes_co2e_usd_mn
+    new_column_name: carbon_inten_first_tier_indirect
+  - column_name: carbon_intensity_direct_first_tier_indirect_tonnes_co2e_usd_mn
+    new_column_name: carbon_inten_direct_plus_first_tier_indirect
+  - column_name: water_intensity_direct_cooling_cubic_meter_usd_mn
+    new_column_name: water_inten_direct_cooling
+  - column_name: water_intensity_direct_process_cubic_meter_usd_mn
+    new_column_name: water_inten_direct_process
+  - column_name: water_intensity_purchased_cubic_meter_usd_mn
+    new_column_name: water_inten_purchased
+  - column_name: water_intensity_direct_purchased_cubic_meter_usd_mn
+    new_column_name: water_inten_direct_plus_purchased
+  - column_name: waste_intensity_landfill_tonnes_usd_mn
+    new_column_name: waste_inten_landfill
+  - column_name: waste_intensity_incineration_tonnes_usd_mn
+    new_column_name: waste_inten_incineration
+  - column_name: waste_intensity_nuclear_tonnes_usd_mn
+    new_column_name: waste_inten_nuclear
+  - column_name: waste_intensity_recycled_tonnes_usd_mn
+    new_column_name: waste_inten_recycled
+  - column_name: total_direct_usd_mn
+    new_column_name: total_direct
+  - column_name: total_indirect_usd_mn
+    new_column_name: total_indirect
+  - column_name: total_direct_indirect_usd_mn
+    new_column_name: total_direct_plus_indirect
+  - column_name: ghg_direct_usd_mn
+    new_column_name: ghg_direct
+  - column_name: ghg_indirect_usd_mn
+    new_column_name: ghg_indirect
+  - column_name: ghg_total_usd_mn
+    new_column_name: ghg_total
+  - column_name: water_direct_usd_mn
+    new_column_name: water_direct
+  - column_name: water_indirect_usd_mn
+    new_column_name: water_indirect
+  - column_name: water_total_usd_mn
+    new_column_name: water_total
+  - column_name: waste_direct_usd_mn
+    new_column_name: waste_direct
+  - column_name: waste_indirect_usd_mn
+    new_column_name: waste_indirect
+  - column_name: waste_total_usd_mn
+    new_column_name: waste_total
+  - column_name: land_and_water_pollutants_direct_usd_mn
+    new_column_name: land_water_pollutants_direct
+  - column_name: land_and_water_pollutants_indirect_usd_mn
+    new_column_name: land_water_pollutants_indirect
+  - column_name: land_and_water_pollutants_total_usd_mn
+    new_column_name: land_water_pollutants_total
+  - column_name: air_pollutants_direct_usd_mn
+    new_column_name: air_pollutants_direct
+  - column_name: air_pollutants_indirect_usd_mn
+    new_column_name: air_pollutants_indirect
+  - column_name: air_pollutants_total_usd_mn
+    new_column_name: air_pollutants_total
+  - column_name: natural_resource_use_direct_usd_mn
+    new_column_name: natural_resource_use_direct
+  - column_name: natural_resource_use_indirect_usd_mn
+    new_column_name: natural_resource_use_indirect
+  - column_name: natural_resource_use_total_usd_mn
+    new_column_name: natural_resource_use_total
+  - column_name: total_direct_impact_ratio
+    new_column_name: total_direct_impact_ratio
+  - column_name: total_indirect_impact_ratio
+    new_column_name: total_indirect_impact_ratio
+  - column_name: total_direct_indirect_impact_ratio
+    new_column_name: total_direct_plus_indirect_impact_ratio
+  - column_name: ghg_direct_impact_ratio
+    new_column_name: ghg_direct_impact_ratio
+  - column_name: ghg_indirect_impact_ratio
+    new_column_name: ghg_indirect_impact_ratio
+  - column_name: ghg_total_impact_ratio
+    new_column_name: ghg_total_impact_ratio
+  - column_name: water_direct_impact_ratio
+    new_column_name: water_direct_impact_ratio
+  - column_name: water_indirect_impact_ratio
+    new_column_name: water_indirect_impact_ratio
+  - column_name: water_total_impact_ratio
+    new_column_name: water_total_impact_ratio
+  - column_name: waste_direct_impact_ratio
+    new_column_name: waste_direct_impact_ratio
+  - column_name: waste_indirect_impact_ratio
+    new_column_name: waste_indirect_impact_ratio
+  - column_name: waste_total_impact_ratio
+    new_column_name: waste_total_impact_ratio
+  - column_name: land_and_water_pollutants_direct_impact_ratio
+    new_column_name: land_water_pollutants_direct_impact_ratio
+  - column_name: land_and_water_pollutants_indirect_impact_ratio
+    new_column_name: land_water_pollutants_indirect_impact_ratio
+  - column_name: land_and_water_pollutants_total_impact_ratio
+    new_column_name: land_water_pollutants_total_impact_ratio
+  - column_name: air_pollutants_direct_impact_ratio
+    new_column_name: air_pollutants_direct_impact_ratio
+  - column_name: air_pollutants_indirect_impact_ratio
+    new_column_name: air_pollutants_indirect_impact_ratio
+  - column_name: air_pollutants_total_impact_ratio
+    new_column_name: air_pollutants_total_impact_ratio
+  - column_name: natural_resource_use_direct_impact_ratio
+    new_column_name: natural_resource_use_direct_impact_ratio
+  - column_name: natural_resource_use_indirect_impact_ratio
+    new_column_name: natural_resource_use_indirect_impact_ratio
+  - column_name: natural_resource_use_total_impact_ratio
+    new_column_name: natural_resource_use_total_impact_ratio
+  - column_name: carbon_weighted_disclosure
+    new_column_name: carbon_weighted_disclosure
+  - column_name: water_weighted_disclosure
+    new_column_name: water_weighted_disclosure
+  - column_name: waste_weighted_disclosure
+    new_column_name: waste_weighted_disclosure
+  - column_name: revenue_usd_mn
+    new_column_name: revenue
+  - column_name: figurerestate
+    new_column_name: figure_restated
+  - column_name: effectivedate
+    new_column_name: effective_date
+  df_pipeline_column_type_conversion:
+  - column_name: tcuid
+    new_type: integer
+  - column_name: fiscal_year
+    new_type: integer
+  - column_name: gics_sector_code
+    new_type: integer
+  - column_name: gics_industry_group_code
+    new_type: integer
+  - column_name: gics_industry_code
+    new_type: integer
+  - column_name: gics_subindustry_code
+    new_type: integer
+  - column_name: carbon_scope1
+    new_type: double
+  - column_name: carbon_scope2
+    new_type: double
+  - column_name: carbon_scope3
+    new_type: double
+  - column_name: carbon_direct
+    new_type: double
+  - column_name: carbon_first_tier_indirect
+    new_type: double
+  - column_name: carbon_direct_plus_first_tier_indirect
+    new_type: double
+  - column_name: water_direct_cooling
+    new_type: double
+  - column_name: water_direct_process
+    new_type: double
+  - column_name: water_purchased
+    new_type: double
+  - column_name: water_direct_plus_purchased
+    new_type: double
+  - column_name: waste_landfill
+    new_type: double
+  - column_name: waste_incineration
+    new_type: double
+  - column_name: waste_nuclear
+    new_type: double
+  - column_name: waste_recycled
+    new_type: double
+  - column_name: carbon_inten_scope1
+    new_type: double
+  - column_name: carbon_inten_scope2
+    new_type: double
+  - column_name: carbon_inten_scope3
+    new_type: double
+  - column_name: carbon_inten_direct
+    new_type: double
+  - column_name: carbon_inten_first_tier_indirect
+    new_type: double
+  - column_name: carbon_inten_direct_plus_first_tier_indirect
+    new_type: double
+  - column_name: water_inten_direct_cooling
+    new_type: double
+  - column_name: water_inten_direct_process
+    new_type: double
+  - column_name: water_inten_purchased
+    new_type: double
+  - column_name: water_inten_direct_plus_purchased
+    new_type: double
+  - column_name: waste_inten_landfill
+    new_type: double
+  - column_name: waste_inten_incineration
+    new_type: double
+  - column_name: waste_inten_nuclear
+    new_type: double
+  - column_name: waste_inten_recycled
+    new_type: double
+  - column_name: total_direct
+    new_type: double
+  - column_name: total_indirect
+    new_type: double
+  - column_name: total_direct_plus_indirect
+    new_type: double
+  - column_name: ghg_direct
+    new_type: double
+  - column_name: ghg_indirect
+    new_type: double
+  - column_name: ghg_total
+    new_type: double
+  - column_name: water_direct
+    new_type: double
+  - column_name: water_indirect
+    new_type: double
+  - column_name: water_total
+    new_type: double
+  - column_name: waste_direct
+    new_type: double
+  - column_name: waste_indirect
+    new_type: double
+  - column_name: waste_total
+    new_type: double
+  - column_name: land_water_pollutants_direct
+    new_type: double
+  - column_name: land_water_pollutants_indirect
+    new_type: double
+  - column_name: land_water_pollutants_total
+    new_type: double
+  - column_name: air_pollutants_direct
+    new_type: double
+  - column_name: air_pollutants_indirect
+    new_type: double
+  - column_name: air_pollutants_total
+    new_type: double
+  - column_name: natural_resource_use_direct
+    new_type: double
+  - column_name: natural_resource_use_indirect
+    new_type: double
+  - column_name: natural_resource_use_total
+    new_type: double
+  - column_name: total_direct_impact_ratio
+    new_type: double
+  - column_name: total_indirect_impact_ratio
+    new_type: double
+  - column_name: total_direct_plus_indirect_impact_ratio
+    new_type: double
+  - column_name: ghg_direct_impact_ratio
+    new_type: double
+  - column_name: ghg_indirect_impact_ratio
+    new_type: double
+  - column_name: ghg_total_impact_ratio
+    new_type: double
+  - column_name: water_direct_impact_ratio
+    new_type: double
+  - column_name: water_indirect_impact_ratio
+    new_type: double
+  - column_name: water_total_impact_ratio
+    new_type: double
+  - column_name: waste_direct_impact_ratio
+    new_type: double
+  - column_name: waste_indirect_impact_ratio
+    new_type: double
+  - column_name: waste_total_impact_ratio
+    new_type: double
+  - column_name: land_water_pollutants_direct_impact_ratio
+    new_type: double
+  - column_name: land_water_pollutants_indirect_impact_ratio
+    new_type: double
+  - column_name: land_water_pollutants_total_impact_ratio
+    new_type: double
+  - column_name: air_pollutants_direct_impact_ratio
+    new_type: double
+  - column_name: air_pollutants_indirect_impact_ratio
+    new_type: double
+  - column_name: air_pollutants_total_impact_ratio
+    new_type: double
+  - column_name: natural_resource_use_direct_impact_ratio
+    new_type: double
+  - column_name: natural_resource_use_indirect_impact_ratio
+    new_type: double
+  - column_name: natural_resource_use_total_impact_ratio
+    new_type: double
+  - column_name: carbon_weighted_disclosure
+    new_type: double
+  - column_name: water_weighted_disclosure
+    new_type: double
+  - column_name: waste_weighted_disclosure
+    new_type: double
+  - column_name: revenue
+    new_type: double
+  - column_name: accounting_year_end
+    new_type: date
+  - column_name: figure_restated
+    new_type: integer
+  - column_name: effective_date
+    new_type: date
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: file_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: trucost_env_cpucu

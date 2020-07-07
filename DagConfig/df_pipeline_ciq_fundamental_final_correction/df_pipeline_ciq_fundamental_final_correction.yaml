@@ -1,0 +1,15 @@
+df_pipeline_ciq_fundamental_final_correction:
+  description: "Dag for overwrite records to fundamental bbg_ciq"
+  tasks:
+    df_pipeline_ciq_entry_point:
+    csv_to_parquet_landing_to_raw:
+      python_callable_name: df_pipeline_transformation
+      dependencies: [df_pipeline_ciq_entry_point]
+    update_partition_in_raw_catalog:
+      python_callable_name: df_pipeline_update_raw_partition
+      dependencies: [csv_to_parquet_landing_to_raw]
+    ciq_fundamental_final_correction:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [update_partition_in_raw_catalog]
+    df_pipeline_exit_point:
+      dependencies: [ciq_fundamental_final_correction]

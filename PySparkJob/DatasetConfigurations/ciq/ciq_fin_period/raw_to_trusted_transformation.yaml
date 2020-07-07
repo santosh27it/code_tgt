@@ -1,0 +1,39 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_derive_column:
+  - new_column_name: df_meta_p_cppib
+    expression:
+      name: df_constant
+      arg: P
+  df_pipeline_column_type_conversion:
+  - column_name: financialperiodid
+    new_type: integer
+  - column_name: companyid
+    new_type: integer
+  - column_name: periodtypeid
+    new_type: integer
+  - column_name: calendaryear
+    new_type: integer
+  - column_name: calendarquarter
+    new_type: integer
+  - column_name: fiscalyear
+    new_type: integer
+  - column_name: fiscalquarter
+    new_type: integer
+  - column_name: latestperiodflag
+    new_type: integer
+  - column_name: fiscalchainseriesid
+    new_type: integer
+  - column_name: df_meta_run_date
+    new_type: date
+  df_pipeline_upsert_delete:
+  - hudi_table_name: ciq_ciqfinperiod
+    catalog_db: df_trusted_${env}
+    record_keys: financialperiodid
+    partition_keys: df_meta_p_cppib
+    precombine_field: df_meta_system_process_date
+    del_filter: op='D'
+    select_cols: [financialperiodid,companyid,periodtypeid,calendaryear,calendarquarter,fiscalyear,fiscalquarter,latestperiodflag,fiscalchainseriesid,op,df_meta_epoch,df_meta_file_name,df_meta_run_date,df_meta_job_id,df_meta_p_cppib]
+    record_size: 20
+    output_path: s3://cppib-data-fabric-trusted-${env}/ciq/ciq_fin_finperiod
+

@@ -1,0 +1,11 @@
+properties:
+  # expected_datasets: [rri, company_identifiers]
+  expected_datasets: []
+  # s3_prefix: [
+  #   Bloomberg/equity_price/equity_euro,
+  #   Bloomberg/equity_price/equity_lamr,
+  #   Bloomberg/equity_price/equity_namr,
+  #   Bloomberg/equity_price/equity_asia1,
+  #   Bloomberg/equity_price/equity_asia2,
+  #   ]
+  # s3_prefix: [pas_de/security]

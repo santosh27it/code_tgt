@@ -1,0 +1,20 @@
+df_pipeline_ciq_fundamental_awb:
+  description: "Dag for ciq"
+  tasks:
+    df_pipeline_entry_point:
+
+    ciq_spark_transform:
+      python_callable_name: df_pipeline_create_cluster
+      dependencies: [df_pipeline_entry_point]
+
+    transform_emr_sensor:
+      operator: EmrSensor
+      provide_context: True
+      dependencies: [ciq_spark_transform]
+
+    update_technical_catalog_transform:
+      python_callable_name: df_pipeline_update_technical_catalog
+      dependencies: [transform_emr_sensor]
+
+    df_pipeline_exit_point:
+      dependencies: [update_technical_catalog_transform]

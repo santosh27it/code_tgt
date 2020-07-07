@@ -1,0 +1,14 @@
+df_pipeline_pricing_awb:
+  description: "Dag for pricing"
+  tasks:
+    pricing_spark:
+      python_callable_name: df_pipeline_create_cluster
+
+    pricing_emr_sensor:
+      operator: EmrSensor
+      provide_context: True
+      dependencies: [pricing_spark]
+
+    update_technical_catalog_transform:
+      python_callable_name: df_pipeline_update_technical_catalog
+      dependencies: [pricing_emr_sensor]

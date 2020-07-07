@@ -1,0 +1,2 @@
+properties:
+  column_head: 'op,financialperiodid,companyid,periodtypeid,calendaryear,calendarquarter,fiscalyear,fiscalquarter,latestperiodflag,fiscalchainseriesid'

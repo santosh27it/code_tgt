@@ -1,0 +1,4 @@
+properties:
+  config_path: Pipeline/PysparkJob/idc/global_price_info/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  driver_memory: 1024m

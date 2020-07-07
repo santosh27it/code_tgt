@@ -1,0 +1,3 @@
+properties:
+  dataset_depends_on: company_identifiers
+  dependent_dataset: [rri]

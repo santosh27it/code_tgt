@@ -1,0 +1,100 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_derive_column:
+  - new_column_name: date
+    column_name: date
+    expression:
+      name: df_extract_date
+      arg: YYYYMMDD
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  df_pipeline_column_type_conversion:
+  - column_name: file_date
+    new_type: date
+  - column_name: gvkey
+    new_type: integer
+  - column_name: p
+    new_type: double
+  - column_name: p1
+    new_type: double
+  - column_name: p2
+    new_type: double
+  - column_name: r
+    new_type: double
+  - column_name: r1
+    new_type: double
+  - column_name: r2
+    new_type: double
+  - column_name: v
+    new_type: double
+  - column_name: v1
+    new_type: double
+  - column_name: v2
+    new_type: double
+  - column_name: intrinsic_value_percentile
+    new_type: double
+  - column_name: prvit
+    new_type: integer
+  - column_name: prvit_prime
+    new_type: integer
+  - column_name: prvit_prime_beta_n
+    new_type: integer
+  - column_name: eva_margin
+    new_type: double
+  - column_name: eva_momentum
+    new_type: double
+  - column_name: volatility_of_eva_margin
+    new_type: double
+  - column_name: ebitdar2totdebt
+    new_type: double
+  - column_name: mva_margin
+    new_type: double
+  - column_name: fgr
+    new_type: double
+  - column_name: implied_eva_momentum
+    new_type: double
+  - column_name: nopatyield
+    new_type: double
+  - column_name: mvaspread
+    new_type: double
+  - column_name: eva_shock_qtr
+    new_type: double
+  - column_name: ebitdar_margin
+    new_type: double
+  - column_name: productive_capital_charges
+    new_type: double
+  - column_name: capital
+    new_type: double
+  - column_name: cva
+    new_type: double
+  - column_name: fva
+    new_type: double
+  - column_name: eva_spread
+    new_type: double
+  - column_name: 1q_eva_momentum
+    new_type: double
+  - column_name: 1y_eva_momentum
+    new_type: double
+  - column_name: 3y_eva_momentum
+    new_type: double
+  - column_name: prvit_prime_score_vs_industry_group
+    new_type: double
+  - column_name: prvit_prime_score_vs_country
+    new_type: double
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      date_key: date
+      join_maps: "sedol: sedol, cusip: cusip"
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "sedol: id_sedol, cusip: id_cusip"
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: iss_eva

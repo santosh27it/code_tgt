@@ -1,0 +1,20 @@
+workflow_steps:
+  df_pipeline_esg_snapshot_read:
+  - filter_date_column: eom_date
+  df_pipeline_window_partition:
+  - partition_column: [repriskid,primary_isin,eom_date]
+    order_column: cppib_sec_id
+    min_or_max: max
+    row: 1
+  df_pipeline_derive_column:
+  - column_name: eom_date
+    new_column_name: ym
+    expression: 
+      name: df_extract_year_month  # need to create custom expression: extract_year_month? might need custom args as well
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: snapshot_date
+    output_path: s3://cppib-data-fabric-enriched-${env}/reprisk/reprisk_rri_monthly
+    catalog_db_name: df_enriched_${env}
+    catalog_table_name: reprisk_rri_monthly

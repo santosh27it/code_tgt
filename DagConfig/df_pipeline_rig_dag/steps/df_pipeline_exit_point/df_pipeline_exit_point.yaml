@@ -1,0 +1,12 @@
+properties:
+  downstream_s3_prefix_mapping: 
+    security: [
+      bloomberg,
+      # idc,
+      iss,
+      msci,
+      reprisk,
+      truvalue,
+      refinitiv
+      ]
+  # time_delta: -5

@@ -1,0 +1,12 @@
+df_pipeline_strategy_neutral_equity_pricing_dag:
+  description: "Equity price Model Raw to Strategy Neutral DAG"
+  tasks:
+    refine_and_upload_to_enriched_zone:
+      python_callable_name: df_pipeline_submit_pyspark
+    apply_price_correction:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [refine_and_upload_to_enriched_zone]
+    df_pipeline_trigger_awb:
+      dependencies: [apply_price_correction]
+    df_pipeline_exit_point:
+      dependencies: [df_pipeline_trigger_awb]

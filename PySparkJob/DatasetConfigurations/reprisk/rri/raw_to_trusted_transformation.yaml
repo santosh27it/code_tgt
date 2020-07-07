@@ -1,0 +1,149 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  - column_name: reprisk_company_id
+    new_column_name: repriskid
+  - column_name: to_date
+    new_column_name: eom_date
+  - column_name: principle_1_human_rights
+    new_column_name: principle_1
+  - column_name: principle_2_human_rights
+    new_column_name: principle_2
+  - column_name: principle_3_labour
+    new_column_name: principle_3
+  - column_name: principle_4_labour
+    new_column_name: principle_4
+  - column_name: principle_5_labour
+    new_column_name: principle_5
+  - column_name: principle_6_labour
+    new_column_name: principle_6
+  - column_name: principle_7_environment
+    new_column_name: principle_7
+  - column_name: principle_8_environment
+    new_column_name: principle_8
+  - column_name: principle_9_environment
+    new_column_name: principle_9
+  - column_name: principle_10_anti_corruption
+    new_column_name: principle_10
+  - column_name: e_severity3
+    new_column_name: e_severity_3
+  - column_name: e_severity2
+    new_column_name: e_severity_2
+  - column_name: e_severity1
+    new_column_name: e_severity_1
+  - column_name: s_severity3
+    new_column_name: s_severity_3
+  - column_name: s_severity2
+    new_column_name: s_severity_2
+  - column_name: s_severity1
+    new_column_name: s_severity_1
+  - column_name: g_severity3
+    new_column_name: g_severity_3
+  - column_name: g_severity2
+    new_column_name: g_severity_2
+  - column_name: g_severity1
+    new_column_name: g_severity_1
+  - column_name: e_reach3
+    new_column_name: e_reach_3
+  - column_name: e_reach2
+    new_column_name: e_reach_2
+  - column_name: e_reach1
+    new_column_name: e_reach_1
+  - column_name: s_reach3
+    new_column_name: s_reach_3
+  - column_name: s_reach2
+    new_column_name: s_reach_2
+  - column_name: s_reach1
+    new_column_name: s_reach_1
+  - column_name: g_reach3
+    new_column_name: g_reach_3
+  - column_name: g_reach2
+    new_column_name: g_reach_2
+  - column_name: g_reach1
+    new_column_name: g_reach_1
+  df_pipeline_column_type_conversion:
+  - column_name: repriskid
+    new_type: integer
+  - column_name: eom_date
+    new_type: date
+  - column_name: current_rri
+    new_type: integer
+  - column_name: trend_rri
+    new_type: integer
+  - column_name: peak_rri
+    new_type: integer
+  - column_name: peak_rri_date
+    new_type: date
+  - column_name: country_sector_average
+    new_type: integer
+  - column_name: e_news_count
+    new_type: integer
+  - column_name: s_news_count
+    new_type: integer
+  - column_name: g_news_count
+    new_type: integer
+  - column_name: e_severity_3
+    new_type: integer
+  - column_name: e_severity_2
+    new_type: integer
+  - column_name: e_severity_1
+    new_type: integer
+  - column_name: s_severity_3
+    new_type: integer
+  - column_name: s_severity_2
+    new_type: integer
+  - column_name: s_severity_1
+    new_type: integer
+  - column_name: g_severity_3
+    new_type: integer
+  - column_name: g_severity_2
+    new_type: integer
+  - column_name: g_severity_1
+    new_type: integer
+  - column_name: e_reach_3
+    new_type: integer
+  - column_name: e_reach_2
+    new_type: integer
+  - column_name: e_reach_1
+    new_type: integer
+  - column_name: s_reach_3
+    new_type: integer
+  - column_name: s_reach_2
+    new_type: integer
+  - column_name: s_reach_1
+    new_type: integer
+  - column_name: g_reach_3
+    new_type: integer
+  - column_name: g_reach_2
+    new_type: integer
+  - column_name: g_reach_1
+    new_type: integer
+  - column_name: total_news_count
+    new_type: integer
+  df_pipeline_lookup:
+  - glue:
+      catalog_db: df_trusted_${env}
+      catalog_table: 'reprisk_company_identifiers'
+    join_type: left
+    join_maps: "repriskid: repriskid, file_date: file_date"
+    join_filter: null
+    outputs: ['left_df.*', 'right_df.company_name','right_df.sector','right_df.headquarters','right_df.primary_isin']
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      date_key: eom_date
+      join_maps: "primary_isin: isin"
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "primary_isin: id_isin"
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: eom_date
+    output_path: s3://cppib-data-fabric-trusted-${env}/reprisk/reprisk_rri_monthly
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: reprisk_rri_monthly

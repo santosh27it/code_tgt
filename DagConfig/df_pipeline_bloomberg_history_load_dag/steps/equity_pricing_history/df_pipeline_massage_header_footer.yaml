@@ -1,0 +1,2 @@
+properties:
+  column_head: 'date|security|cur_mkt_cap|eqy_sh_out|eqy_float|px_last|eqy_dvd_yld_ind|eqy_dvd_yld_12m|eqy_dvd_yld_12m_net|px_volume|px_open|px_high|px_low|last_update'

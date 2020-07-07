@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/trucost/env_all_isin/raw_to_trusted_transformation.yaml
+  output_bucket: trusted

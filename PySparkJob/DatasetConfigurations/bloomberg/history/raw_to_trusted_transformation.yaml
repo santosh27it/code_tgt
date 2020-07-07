@@ -1,0 +1,370 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: date
+    new_column_name: pricing_date
+  - column_name: security
+    new_column_name: cppib_sec_id
+  df_pipeline_derive_column:
+  - column_name: pricing_date
+    new_column_name: ym
+    expression:
+      name: df_extract_year_month
+  - new_column_name: security_description
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: rcode
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: nfiled
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: ticker
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: exch_code
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_sedol1
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_wertpapier
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_isin
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_dutch
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_valoren
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_french
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_belgium
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_company
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_security
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_cusip
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_common
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: high_52week
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: low_52week
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: high_dt_52week
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: low_dt_52week
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_bid
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_mid
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_ask
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_fixing
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: pricing_source
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: eqy_beta
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: crncy
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_local
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_quote_lot_size
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: last_update_dt_exch_tz
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: eqy_prim_exch
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: eqy_prim_exch_shrt
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: security_typ
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: name
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_prim_security_flag
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: eqy_prim_security_comp_exch
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: market_status
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_unique
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: market_sector_des
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: cntry_issue_iso
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_round_lot_size
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: composite_exch_code
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_nasdaq_close
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: eqy_sh_out_real
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: cntry_of_incorporation
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: cntry_of_domicile
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: mkt_cap_listed
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: px_trade_lot_size
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_sedol2
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: sedol1_country_iso
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: sedol2_country_iso
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_mic_prim_exch
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_mic_local_exch
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: ticker_and_exch_code
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_exch_symbol
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_connect
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: exch_mkt_grp
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: group_name_static
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_sec_num_src
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: settle_dt
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_global
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: composite_id_bb_global
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: id_bb_sec_num_des
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: feed_source
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: trading_system_identifier
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  - new_column_name: trading_system_identifier_des
+    check_existence: true
+    expression:
+      name: df_constant
+      arg: 'null'
+  df_pipeline_column_type_conversion:
+  - column_name: cppib_sec_id
+    new_type: bigint
+  - column_name: pricing_date
+    new_type: date
+  - column_name: px_bid
+    new_type: double
+  - column_name: px_mid
+    new_type: double
+  - column_name: px_ask
+    new_type: double
+  - column_name: px_open
+    new_type: double
+  - column_name: px_high
+    new_type: double
+  - column_name: px_low
+    new_type: double
+  - column_name: px_last
+    new_type: double
+  - column_name: cur_mkt_cap
+    new_type: double
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: ym
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: bbg_equity_pricing_history
+    output_path: s3://cppib-data-fabric-trusted-${env}/bloomberg/bbg_equity_pricing_history

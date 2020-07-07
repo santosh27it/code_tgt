@@ -1,0 +1,5 @@
+properties:
+  config_path: Pipeline/PysparkJob/qsrp/df_pipeline_strategy_neutral_equity_pricing_dag/apply_price_correction.yaml
+  output_bucket: enriched
+  driver_memory: 3g
+  executor_memory: 20g

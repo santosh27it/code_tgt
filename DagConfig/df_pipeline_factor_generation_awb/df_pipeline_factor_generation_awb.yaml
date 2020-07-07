@@ -1,0 +1,29 @@
+df_pipeline_factor_generation_awb:
+  description: "Dag for ciq"
+  tasks:
+    big_fact_generation_spark:
+      python_callable_name: df_pipeline_create_cluster
+
+    big_fact_emr_sensor:
+      operator: EmrSensor
+      provide_context: True
+      dependencies: [big_fact_generation_spark]
+
+    update_technical_catalog_big_fact:
+      python_callable_name: df_pipeline_update_technical_catalog
+      dependencies: [big_fact_emr_sensor]
+
+    factor_calculation_spark:
+      python_callable_name: df_pipeline_create_cluster
+      dependencies: [update_technical_catalog_big_fact]
+
+    factor_calculation_emr_sensor:
+      operator: EmrSensor
+      provide_context: True
+      dependencies: [factor_calculation_spark]
+
+    update_technical_catalog_factor_calculation:
+      python_callable_name: df_pipeline_update_technical_catalog
+      dependencies: [factor_calculation_emr_sensor]
+
+    

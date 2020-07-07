@@ -1,0 +1,23 @@
+df_pipeline_refinitiv_dag:
+  description: "Refinitiv Transformation"
+  default_args:
+    retries: 3
+  tasks:
+    df_pipeline_entry_point_lambda:
+    csv_to_parquet_raw_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [df_pipeline_entry_point_lambda]
+    raw_data_quality_check:
+      python_callable_name: df_pipeline_dq_check
+      dependencies: [csv_to_parquet_raw_transformation]
+    raw_to_trusted_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [csv_to_parquet_raw_transformation]
+    trusted_data_quality_check:
+      python_callable_name: df_pipeline_dq_check
+      dependencies: [raw_to_trusted_transformation]
+    trusted_to_enriched_transformation:
+      python_callable_name: df_pipeline_submit_pyspark
+      dependencies: [raw_to_trusted_transformation]
+    df_pipeline_exit_point:
+      dependencies: [trusted_to_enriched_transformation]

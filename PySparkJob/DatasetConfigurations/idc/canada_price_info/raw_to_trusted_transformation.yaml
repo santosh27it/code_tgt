@@ -1,0 +1,16 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_column_type_conversion:
+  - column_name: sic
+    new_type: integer
+  - column_name: code
+    new_type: integer
+  - column_name: primaryflag
+    new_type: integer
+  - column_name: lastupdate
+    new_type: date
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: idc_canada_price_info

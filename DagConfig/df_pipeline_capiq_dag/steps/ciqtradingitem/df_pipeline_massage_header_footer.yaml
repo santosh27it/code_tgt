@@ -1,0 +1,2 @@
+properties:
+  column_head: 'op,tradingitemid,securityid,tickersymbol,exchangeid,currencyid,tradingitemstatusid,primaryflag'

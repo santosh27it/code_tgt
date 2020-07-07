@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/rig/fx_rate/raw_to_trusted_transformation.yaml
+  output_bucket: trusted

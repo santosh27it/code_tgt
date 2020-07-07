@@ -1,0 +1,72 @@
+workflow_steps:
+  df_pipeline_read_catalog:
+  - catalog_db: df_enriched_${env}
+    catalog_table: capiq_fundamental
+    filter: pit_date = :corrupt_date
+  df_pipeline_delete:
+  - hudi_table_name: capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    record_size: 20
+    memory_max_merge_size: 2004857600000
+    output_path: s3://cppib-data-fabric-enriched-${env}/ciq_fundamental_raw/ciq_fundamental_raw/
+  df_pipeline_read_catalog_dup_1:
+  - catalog_db: df_enriched_${env}
+    catalog_table: qsrp_capiq_fundamental
+    filter: pit_date = :corrupt_date
+  df_pipeline_delete_dup_1:
+  - hudi_table_name: qsrp_capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    record_size: 20
+    memory_max_merge_size: 2004857600000
+    output_path: s3://cppib-data-fabric-enriched-${env}/qsrp_ciq_fundamental/qsrp_ciq_fundamental/
+  df_pipeline_read_catalog_dup_2:
+  - catalog_db: df_enriched_${env}
+    catalog_table: capiq_fundamental
+    filter: pit_date = :prev_date
+  df_pipeline_drop:
+  - columns: ['pit_date']
+  df_pipeline_derive_column:
+  - new_column_name: pit_date
+    check_existence: true
+    expression_from_input: corrupt_date_column_expression
+  df_pipeline_upsert:
+  - hudi_table_name: qsrp_capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    record_size: 20
+    memory_max_merge_size: 2004857600000
+    output_path: s3://cppib-data-fabric-enriched-${env}/qsrp_ciq_fundamental/qsrp_ciq_fundamental/
+  df_pipeline_upsert_dup_1:
+  - hudi_table_name: capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    record_size: 20
+    memory_max_merge_size: 2004857600000
+    output_path: s3://cppib-data-fabric-enriched-${env}/ciq_fundamental_raw/ciq_fundamental_raw/
+  df_pipeline_read_catalog_dup_3:
+  - catalog_db: df_trusted_${env}
+    catalog_table: pas_de_ciq_fundamental_final_correction
+    filter: pit_date = :corrupt_date
+  df_pipeline_drop_dup_1:
+  - columns: ['df_meta_system_process_date','df_meta_job_id','df_meta_run_date','df_meta_extracted_date','df_meta_file_name','df_meta_epoch']
+  df_pipeline_upsert_dup_2:
+  - hudi_table_name: qsrp_capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    filter: overridetype != 'del'
+    operation_column: overridetype
+    record_size: 20
+    memory_max_merge_size: 2004857600000
+    output_path: s3://cppib-data-fabric-enriched-${env}/qsrp_ciq_fundamental/qsrp_ciq_fundamental

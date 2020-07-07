@@ -1,0 +1,18 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  - column_name: isPrimary
+    new_column_name: is_primary
+  df_pipeline_column_type_conversion:
+  - column_name: tcuid
+    new_type: integer
+  - column_name: is_primary
+    new_type: integer
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: file_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: trucost_env_all_isin

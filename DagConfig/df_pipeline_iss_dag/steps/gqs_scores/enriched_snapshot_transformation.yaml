@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/iss/gqs_scores/enriched_snapshot_transformation.yaml
+  output_bucket: enriched

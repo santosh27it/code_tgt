@@ -1,0 +1,4 @@
+properties:
+  config_path: Pipeline/PysparkJob/refinitiv/esg/trusted_to_enriched_transformation.yaml
+  output_bucket: enriched
+  driver_memory: 2048m

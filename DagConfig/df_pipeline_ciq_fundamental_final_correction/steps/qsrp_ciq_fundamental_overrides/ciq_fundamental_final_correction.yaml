@@ -1,0 +1,5 @@
+properties:
+  config_path: Pipeline/PysparkJob/ciq/ciq_fundamental_final_upsert/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  driver_memory: 2048m
+  executor_memory: 4g

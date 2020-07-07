@@ -1,0 +1,26 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: currencycode
+    new_column_name: currency_code
+  - column_name: countrycode
+    new_column_name: country_code
+  - column_name: financialcentrename
+    new_column_name: financial_centre_name
+  - column_name: eventyear
+    new_column_name: event_year
+  - column_name: eventname
+    new_column_name: event_name
+  df_pipeline_column_type_conversion:
+  - column_name: date
+    new_type: date
+  - column_name: event_year
+    new_type: integer
+  df_pipeline_upsert:
+  - hudi_table_name: pas_de_holiday_calendar
+    catalog_db: df_trusted_${env}
+    record_keys: date,country_code
+    partition_keys: currency_code
+    filter_duplicates: true
+    precombine_field: df_meta_system_process_date
+    output_path: s3://cppib-data-fabric-trusted-${env}/pas_de/pas_de_holiday_calendar

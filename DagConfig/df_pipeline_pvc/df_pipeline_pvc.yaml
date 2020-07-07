@@ -1,0 +1,10 @@
+df_pipeline_pvc:
+  description: "Load data from a PVC file into a staging database table"
+  tasks:
+    df_pipeline_pvc_init:
+    df_pipeline_pvc_extract:
+      dependencies: [df_pipeline_pvc_init]
+    df_pipeline_pvc_mapping:
+      dependencies: [df_pipeline_pvc_extract]
+    df_pipeline_pvc_persist:
+      dependencies: [df_pipeline_pvc_mapping]

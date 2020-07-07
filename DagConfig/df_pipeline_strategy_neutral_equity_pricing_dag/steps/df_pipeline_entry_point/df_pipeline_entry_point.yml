@@ -1,0 +1,35 @@
+properties:
+  expected_datasets: [
+    # 'equity_euro',
+    # 'equity_lamr',
+    # 'equity_namr',
+    # 'equity_asia1',
+    # 'equity_asia2',
+    # 'canada_price_share',
+    # 'canada_price_info',
+    # 'canada_price_adjustment',
+    # 'canada_price_daily',
+    # 'global_price_ret',
+    # 'global_price_val',
+    # 'global_price_info',
+    # 'global_price_adjustment',
+    # 'us_price_info',
+    # 'us_price_daily',
+    # 'us_price_adjustment',
+    # 'us_price_share',
+    # 'global_price_code',
+    # 'global_price_share',
+    # 'security',
+    # 'id_mapping',
+    # 'fx_rate',
+    # 'holiday_calendar',
+    # 'equity_pricing_corrections'
+    ]
+  # s3_prefix: [
+  #   Bloomberg/equity_price/equity_euro/df_pipeline_security/df_pipeline_strategy_neutral_equity_pricing_dag,
+  #   idc/global/price_adjustment/df_pipeline_security/df_pipeline_strategy_neutral_equity_pricing_dag
+  #   ]
+  # s3_prefix: [
+  #   Bloomberg/equity_price/equity_euro,
+  #   idc/global/price_adjustment
+  # ]

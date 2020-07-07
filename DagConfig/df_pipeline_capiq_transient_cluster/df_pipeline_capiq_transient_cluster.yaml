@@ -1,0 +1,23 @@
+df_pipeline_capiq_transient_cluster:
+  description: "Dag for large capiq(ciq collection and also ciq market cap) file transformation from landing to vendor raw, and vendor raw to model raw"
+  default_args:
+    retries: 3
+  tasks:
+    df_pipeline_ciq_entry_point:
+    df_pipeline_massage_header_footer:
+      dependencies: [df_pipeline_ciq_entry_point]
+    csv_to_parquet_landing_to_raw:
+      python_callable_name: df_pipeline_transformation
+      dependencies: [df_pipeline_massage_header_footer]
+    update_partition_in_raw_catalog:
+      python_callable_name: df_pipeline_update_raw_partition
+      dependencies: [csv_to_parquet_landing_to_raw]
+    raw_to_trusted_transformation:
+      python_callable_name: df_pipeline_emr_job_transient_cluster 
+      dependencies: [update_partition_in_raw_catalog]
+    job_emr_sensor:
+      operator: EmrSensor
+      provide_context: True
+      dependencies: [raw_to_trusted_transformation]
+    df_pipeline_exit_point:
+      dependencies: [job_emr_sensor]

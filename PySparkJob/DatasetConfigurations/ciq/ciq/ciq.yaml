@@ -1,0 +1,77 @@
+workflow_steps:
+  df_pipeline_ciq:
+  - lookback_years: 8
+    item_list: [7, 15, 16, 21, 32, 34, 41, 65, 75, 77, 80, 82, 83, 98, 112, 209, 379, 400, 1002, 1005, 1006, 1007, 1043, 1046, 1049, 1052, 1171, 1297, 2006, 2021, 2022, 2057, 2164, 2169, 2172, 2181, 3168, 3171, 4051, 4173, 21671, 2159]
+    item_list_to_be_negated: [32, 77, 80, 82, 98, 209]
+    sec_ids: []
+    company_ids: []
+    use_db: 0
+    db_url: "jdbc:postgresql://xpressfeed-aurora.cly1v4yjum8d.us-east-1.rds.amazonaws.com:3306/xpressfeed?user=xpressfeed_loader&password=cppib123"
+    check_point_location: s3://cppib-data-fabric-staging-${env}/df_pipeline_strategy_neutral_ciq_dag
+    dataframes:
+      ciqfincollectiondata:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqfincollectiondata'
+        catalog_filter: null
+      ciqfincollectiontextdata:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqfincollectiontextdata'
+        catalog_filter: null
+      ciqfininstancetocollection:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqfininstancetocollection'
+        catalog_filter: null
+      ciqfincollection:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqfincollection'
+        catalog_filter: null
+      ciqmarketcap:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqmarketcap'
+        catalog_filter: null
+      ciqfininstance:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqfininstance'
+        catalog_filter: null
+      ciqfinperiod:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqfinperiod'
+        catalog_filter: null
+      ciqsecurity:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqsecurity'
+        catalog_filter: null
+      ciqtradingitem:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqtradingitem'
+        catalog_filter: null
+      ciqdataitem:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqdataitem'
+        catalog_filter: null
+      ciqcurrency:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqcurrency'
+        catalog_filter: null
+      ciqfinunittype:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'ciq_ciqfinunittype'
+        catalog_filter: null
+      id_mapping_history_file:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'pas_de_id_mapping'
+        catalog_filter: null
+  df_pipeline_upsert:
+  - hudi_table_name: qsrp_capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    output_path: s3://cppib-data-fabric-enriched-${env}/qsrp_ciq_fundamental/qsrp_ciq_fundamental/
+  df_pipeline_upsert_dup_1:
+  - hudi_table_name: capiq_fundamental
+    catalog_db: df_enriched_${env}
+    record_keys: security_id,fiscal_year,fiscal_quarter,capiq_item_id
+    partition_keys: pit_date
+    precombine_field: last_modified_time
+    output_path: s3://cppib-data-fabric-enriched-${env}/ciq_fundamental_raw/ciq_fundamental_raw/

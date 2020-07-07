@@ -1,0 +1,5 @@
+properties:
+  config_path: Pipeline/PysparkJob/utility/data_correction/ciq_corrupt_data_correction/data_correction.yaml
+  output_bucket: enriched
+  driver_memory: 2048m
+  executor_memory: 8g

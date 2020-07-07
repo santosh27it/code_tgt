@@ -1,0 +1,11 @@
+properties:
+  config_path: Pipeline/PysparkJob/ciq/ciq_fin_collection_data/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  core_instance_type: r5.12xlarge
+  core_instance_count: 4
+  num_executors: 4
+  driver_memory: 2048m
+  executor_memory: 160G
+  executor_cores: 45
+  shuffle_partition: 1200
+  jars: /usr/lib/spark/jars/httpclient-4.5.9.jar,s3://cppib-data-fabric-staging-ENV/jars/spark-bundle-edwin-relation.jar,/usr/lib/spark/external/lib/spark-avro.jar,/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client-*,/usr/share/aws/aws-java-sdk/aws-java-sdk-glue-*

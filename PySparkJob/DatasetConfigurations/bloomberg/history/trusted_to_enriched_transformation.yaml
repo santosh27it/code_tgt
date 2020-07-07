@@ -1,0 +1,16 @@
+workflow_steps:
+  df_pipeline_read:
+  df_pipeline_column_type_conversion:
+  - column_name: ym
+    new_type: string
+  df_pipeline_upsert:
+  - hudi_table_name: bbg_equity_pricing
+    catalog_db: df_enriched_${env}
+    record_keys: cppib_sec_id,pricing_date
+    partition_keys: ym
+    precombine_field: df_meta_system_process_date
+    prune_ranges: false
+    filter_duplicates: true
+    record_size: 10
+    memory_max_merge_size: 2004857600000
+    output_path: s3://cppib-data-fabric-enriched-${env}/bloomberg/bbg_equity_pricing

@@ -1,0 +1,182 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_column_type_conversion:
+  - column_name: snapshotdetailid
+    new_type: integer
+  - column_name: companyid
+    new_type: integer
+  - column_name: gics
+    new_type: integer
+  - column_name: meetingid
+    new_type: integer
+  - column_name: meetingdate
+    new_type: date
+  - column_name: asofdate
+    new_type: date
+  - column_name: dirretirementage
+    new_type: integer
+  - column_name: tenurepolicyinyrs
+    new_type: integer
+  - column_name: boardsize
+    new_type: integer
+  - column_name: avgboardtenureyrs
+    new_type: double
+  - column_name: avgdirectorage
+    new_type: double
+  - column_name: numemployeedirectors_iss
+    new_type: integer
+  - column_name: numaffiliateddirs_iss
+    new_type: integer
+  - column_name: numindependentdirs_iss
+    new_type: integer
+  - column_name: numcontinuingnominees
+    new_type: integer
+  - column_name: numshareholdernominees
+    new_type: integer
+  - column_name: numnewmgmtnominees
+    new_type: integer
+  - column_name: numwomenonboard
+    new_type: integer
+  - column_name: pctwomenonboard
+    new_type: double
+  - column_name: sumofoutsideboards
+    new_type: integer
+  - column_name: pctexec_iss
+    new_type: double
+  - column_name: pctexec_co
+    new_type: double
+  - column_name: pctinsider_iss
+    new_type: double
+  - column_name: pctinsider_co
+    new_type: double
+  - column_name: pctni_ned_iss
+    new_type: double
+  - column_name: pctni_ned_co
+    new_type: double
+  - column_name: pctao_iss
+    new_type: double
+  - column_name: pctao_co
+    new_type: double
+  - column_name: pctindependent_iss
+    new_type: double
+  - column_name: pctindependent_co
+    new_type: double
+  - column_name: pcti_ned_iss
+    new_type: double
+  - column_name: pcti_ned_co
+    new_type: double
+  - column_name: pctemprep_iss
+    new_type: double
+  - column_name: pctemprep_co
+    new_type: double
+  - column_name: numsharesheldbyboard
+    new_type: integer
+  - column_name: pctctrlvotingpower
+    new_type: double
+  - column_name: numfinancialexperts
+    new_type: integer
+  - column_name: numrelativeemps
+    new_type: integer
+  - column_name: numformeremps
+    new_type: integer
+  - column_name: numinterlockdirs
+    new_type: integer
+  - column_name: numcharitableaffdirs
+    new_type: integer
+  - column_name: numgovaffdirs
+    new_type: integer
+  - column_name: numshrepdirs
+    new_type: integer
+  - column_name: numsigshdirs
+    new_type: integer
+  - column_name: numfounders
+    new_type: integer
+  - column_name: numempreps
+    new_type: integer
+  - column_name: numempshreps
+    new_type: integer
+  - column_name: numdirswithtenuredisc
+    new_type: integer
+  - column_name: numdirswprofservdisc
+    new_type: integer
+  - column_name: numboardattestation
+    new_type: integer
+  - column_name: actnumofboardmeetings
+    new_type: integer
+  - column_name: numformerceos
+    new_type: integer
+  - column_name: numdirswithlt75pctatt
+    new_type: integer
+  - column_name: dopctctrlvotingpower
+    new_type: double
+  - column_name: numnonmgmtboardmeeting
+    new_type: integer
+  - column_name: numpartytrans
+    new_type: integer
+  - column_name: totdollarvalueoftransaction
+    new_type: double
+  - column_name: bc_nomcommsize
+    new_type: integer
+  - column_name: bc_compcommsize
+    new_type: integer
+  - column_name: bc_auditcommsize
+    new_type: integer
+  - column_name: bc_nomindepdircnt
+    new_type: integer
+  - column_name: bc_compindepdircnt
+    new_type: integer
+  - column_name: bc_auditindepdircnt
+    new_type: integer
+  - column_name: bc_numnommeetings
+    new_type: integer
+  - column_name: bc_numcompmeetings
+    new_type: integer
+  - column_name: bc_numauditmeetings
+    new_type: integer
+  - column_name: directorid
+    new_type: integer
+  - column_name: bio_age
+    new_type: integer
+  - column_name: bio_birthyear
+    new_type: integer
+  - column_name: boards_dirsince
+    new_type: integer
+  - column_name: boards_nomineetypeid
+    new_type: integer
+  - column_name: aff_numpartytrans
+    new_type: integer
+  - column_name: aff_dollarvaloftrans
+    new_type: double
+  - column_name: sn_numoutsideboards
+    new_type: integer
+  - column_name: owncomp_numofshares
+    new_type: integer
+  - column_name: owncomp_pctctrlvotingpower
+    new_type: double
+  - column_name: levelofsupport
+    new_type: double
+  - column_name: voteresultcollecteddate
+    new_type: date
+  - column_name: issvoterecdate
+    new_type: date
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: file_date
+  - column_name: bio_asseccedethnicity
+    new_column_name: bio_accessedethnicity
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      join_maps: "isin: isin"
+      date_key: file_date
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "isin: id_isin"
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: file_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: iss_director_data

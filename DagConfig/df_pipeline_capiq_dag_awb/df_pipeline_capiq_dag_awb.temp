@@ -1,0 +1,18 @@
+#df_pipeline_capiq_dag_awb:
+#  description: "Dag for fx file transformation"
+#  tasks:
+#    df_pipeline_get_concurrency_inputs:
+#      python_callable_name: df_pipeline_get_concurrency_inputs
+#      python_callable_file: /usr/local/airflow/dags/src/lib/df_pipeline_get_concurrency_inputs.py
+#    df_pipeline_submit_pyspark_ciq_pivot:
+#      python_callable_name: df_pipeline_create_cluster
+#      python_callable_file: /usr/local/airflow/dags/src/lib/df_pipeline_create_cluster.py
+#      concurrency_value: 2
+#      identifier: test
+#      dependencies: [df_pipeline_get_concurrency_inputs]
+    # df_pipeline_submit_pyspark_strategy_neutral:
+    #   python_callable_name: df_pipeline_submit_pyspark
+    #   python_callable_file: /usr/local/airflow/dags/src/lib/df_pipeline_submit_pyspark.py
+    #   dependencies: [df_pipeline_submit_pyspark_ciq_pivot]
+
+

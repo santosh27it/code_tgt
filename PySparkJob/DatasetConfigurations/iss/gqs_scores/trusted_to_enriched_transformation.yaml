@@ -1,0 +1,22 @@
+workflow_steps:
+  df_pipeline_read_catalog:
+  - catalog_db: df_trusted_${env}
+    catalog_table: iss_gqs_scores
+    filter: file_date = :run_date
+  df_pipeline_derive_column:
+  - column_name: updated
+    new_column_name: ym
+    expression:
+      name: df_extract_year_month
+  df_pipeline_column_type_conversion:
+  - column_name: file_date
+    new_type: date
+  df_pipeline_upsert:
+  - hudi_table_name: iss_gqs_scores_master
+    catalog_db: df_enriched_${env}
+    record_keys: updated,company_id
+    partition_keys: ym
+    record_size: 10
+    memory_max_merge_size: 2004857600000
+    precombine_field: df_meta_system_process_date
+    output_path: s3://cppib-data-fabric-enriched-${env}/iss/iss_gqs_scores/

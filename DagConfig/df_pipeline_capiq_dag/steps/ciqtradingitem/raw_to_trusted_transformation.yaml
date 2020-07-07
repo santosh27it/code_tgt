@@ -1,0 +1,4 @@
+properties:
+  config_path: Pipeline/PysparkJob/ciq/ciq_trading_item/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  driver_memory: 4096m

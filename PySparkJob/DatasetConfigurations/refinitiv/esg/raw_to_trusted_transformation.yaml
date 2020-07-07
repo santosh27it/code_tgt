@@ -1,0 +1,24 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      date_key: date
+      join_maps: "isin: isin, sedol: sedol"
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "isin: id_isin, sedol: id_sedol"
+  df_pipeline_column_type_conversion:
+  - column_name: file_date
+    new_type: date
+  - column_name: cppib_sec_id
+    new_type: bigint
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: file_date
+    output_path: s3://cppib-data-fabric-trusted-${env}/refinitiv/refinitiv_esg
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: refinitiv_esg

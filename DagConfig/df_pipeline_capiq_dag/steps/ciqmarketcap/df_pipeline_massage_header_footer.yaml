@@ -1,0 +1,2 @@
+properties:
+  column_head: 'op,companyid,pricingdate,marketcap,tev,sharesoutstanding'

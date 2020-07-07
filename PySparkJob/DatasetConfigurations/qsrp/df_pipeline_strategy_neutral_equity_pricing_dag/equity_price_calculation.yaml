@@ -1,0 +1,124 @@
+workflow_steps:
+  df_pipeline_equity_price:
+  - sec_ids: []
+    start_business_date:
+    end_business_date:
+    dataframes:
+      security_master:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'pas_de_security_equity'
+        catalog_cols: ['cppib_sec_id', 'country_trade', 'market_status', 'df_meta_run_date', 'crncy']
+        catalog_filter: 'cppib_sec_id,df_meta_run_date'
+        catalog_filter_value: sec_ids,max
+      id_mapping:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'pas_de_id_mapping'
+        catalog_cols: ['security_id', 'date_', 'prccodeus', 'prccodeca', 'prccodeglobal']
+        catalog_filter: 'security_id'
+        catalog_filter_value: sec_ids
+      holiday_calendar:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'pas_de_holiday_calendar'
+        catalog_cols: ['country_code', 'date', 'currency_code']
+        catalog_filter: null
+      fx_rates:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'pas_de_fx_rate'
+        catalog_cols: ['date', 'vendor', 'exchange_rate', 'currency']
+        catalog_filter: null
+      bloomberg:
+        catalog_db: df_enriched_${env}
+        catalog_table: 'bbg_equity_pricing'
+        catalog_cols: ['cur_mkt_cap', 'pricing_date', 'cppib_sec_id']
+        catalog_filter: 'cppib_sec_id'
+        catalog_filter_value: sec_ids
+      us_price_daily:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_us_price_daily'
+        catalog_cols: ['run_date', 'code', 'open', 'high', 'low', 'close', 'volume', 'totret', 'date_']
+        catalog_filter: year
+        catalog_filter_value: current-date
+      canada_price_daily:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_canada_price_daily'
+        catalog_cols: ['run_date', 'code', 'open', 'high', 'low', 'close', 'volume', 'totret', 'date_']
+        catalog_filter: 'code,year'
+        catalog_filter_value: id_mapping.prccodeca,current-date
+      global_price_val:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_global_price_val'
+        catalog_cols: ['run_date', 'code', 'open', 'high', 'low', 'close', 'volume', 'currency', 'date_']
+        catalog_filter: 'code,year'
+        catalog_filter_value: id_mapping.prccodeglobal,current-date
+      global_price_ret:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_global_price_ret'
+        catalog_cols: ['run_date', 'code', 'totret','date_']
+        catalog_filter: 'code,year'
+        catalog_filter_value: id_mapping.prccodeglobal,current-date
+      us_price_adj:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_us_price_adjustment'
+        catalog_cols: ['run_date', 'code', 'startdate', 'factor', 'adjtype']
+        catalog_filter: 'code'
+        catalog_filter_value: id_mapping.prccodeus
+      canada_price_adj:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_canada_price_adjustment'
+        catalog_cols: ['run_date', 'code', 'startdate', 'factor', 'adjtype']
+        catalog_filter: 'code'
+        catalog_filter_value: id_mapping.prccodeca
+      global_price_adj:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_global_price_adjustment'
+        catalog_cols: ['run_date', 'code', 'startdate', 'factor']
+        catalog_filter: 'code'
+        catalog_filter_value: id_mapping.prccodeglobal
+      us_price_share:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_us_price_share'
+        catalog_cols: ['run_date', 'code', 'date_', 'shares']
+        catalog_filter: 'code,year'
+        catalog_filter_value: id_mapping.prccodeus,current-date
+      canada_price_share:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_canada_price_share'
+        catalog_cols: ['run_date', 'code', 'date_', 'shares']
+        catalog_filter: 'code,year'
+        catalog_filter_value: id_mapping.prccodeca,current-date
+      global_price_share:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_global_price_share'
+        catalog_cols: ['run_date', 'code', 'date_', 'shares']
+        catalog_filter: 'code'
+        catalog_filter_value: id_mapping.prccodeglobal,current-date
+      currency_code:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_global_price_code'
+        catalog_cols: ['run_date', 'currency', 'desc', 'type']
+        catalog_filter: null
+      canada_price_info:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_canada_price_info'
+        catalog_cols: ['cusip', 'run_date', 'code']
+        catalog_filter: null
+        catalog_filter_value:
+      us_price_info:
+        catalog_db: df_trusted_${env}
+        catalog_table: 'idc_us_price_info'
+        catalog_cols: ['cusip', 'code']
+        catalog_filter: null
+        catalog_filter_value:
+  df_pipeline_rename_column:
+  - column_name: date
+    new_column_name: pricing_date
+  df_pipeline_upsert:
+  - hudi_table_name: equity_pricing
+    catalog_db: df_enriched_${env}
+    prune_ranges: false
+    record_keys: security_id,publish_time,pricing_date
+    partition_keys: ym
+    record_size: 10
+    memory_max_merge_size: 2004857600000
+    precombine_field: arrival_time
+    output_path: s3://cppib-data-fabric-enriched-${env}/equity_pricing

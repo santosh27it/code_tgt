@@ -1,0 +1,8 @@
+properties:
+  config_path: Pipeline/PysparkJob/ciq/ciq_market_cap/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  driver_memory: 1024m
+  executor_memory: 20g
+  executor_cores: 4
+  deploy_mode: client
+  spark_jars: /usr/lib/spark/jars/httpclient-4.5.9.jar,s3://cppib-data-fabric-staging-ENV/jars/spark-bundle-edwin-relation.jar,/usr/lib/spark/external/lib/spark-avro.jar,/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client-*,/usr/share/aws/aws-java-sdk/aws-java-sdk-glue-*

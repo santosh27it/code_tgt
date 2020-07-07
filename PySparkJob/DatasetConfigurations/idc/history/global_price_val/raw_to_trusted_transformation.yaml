@@ -1,0 +1,47 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: date
+    new_column_name: date_
+  df_pipeline_column_type_conversion:
+  - column_name: date_
+    new_type: date
+  - column_name: code
+    new_type: integer
+  - column_name: open
+    new_type: double
+  - column_name: high
+    new_type: double
+  - column_name: low
+    new_type: double
+  - column_name: close
+    new_type: double
+  - column_name: bid
+    new_type: double
+  - column_name: ask
+    new_type: double
+  - column_name: volume
+    new_type: double
+  - column_name: currency
+    new_type: integer
+  - column_name: flags
+    new_type: integer
+  df_pipeline_derive_column:
+  - new_column_name: run_date
+    expression:
+      name: df_constant
+      arg: '2020-03-15'
+  - column_name: date_
+    new_column_name: year
+    expression:
+      name: df_get_year
+  df_pipeline_upsert:
+  - hudi_table_name: idc_global_price_val
+    catalog_db: df_trusted_${env}
+    record_keys: code,date_
+    partition_keys: year
+    record_size: 10
+    memory_max_merge_size: 2004857600000
+    prune_ranges: false
+    write_operation: bulk_insert
+    precombine_field: df_meta_system_process_date

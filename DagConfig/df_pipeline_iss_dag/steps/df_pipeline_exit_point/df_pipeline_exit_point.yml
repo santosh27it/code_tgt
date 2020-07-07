@@ -1,0 +1,3 @@
+properties:
+  dataset_depends_on: gqs_metadata
+  dependent_dataset: [gqs_scores, gqs_answers]

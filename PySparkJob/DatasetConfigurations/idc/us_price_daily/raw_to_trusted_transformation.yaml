@@ -1,0 +1,37 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: date
+    new_column_name: date_
+  df_pipeline_derive_column:
+  - column_name: date_
+    new_column_name: year
+    expression:
+      name: df_get_year
+  df_pipeline_column_type_conversion:
+  - column_name: date_
+    new_type: date
+  - column_name: flags
+    new_type: integer
+  - column_name: code
+    new_type: integer
+  - column_name: open
+    new_type: double
+  - column_name: high
+    new_type: double
+  - column_name: low
+    new_type: double
+  - column_name: close
+    new_type: double
+  - column_name: volume
+    new_type: double
+  - column_name: totret
+    new_type: double
+  - column_name: ccfactor
+    new_type: double
+  df_pipeline_upsert:
+  - hudi_table_name: idc_us_price_daily
+    catalog_db: df_trusted_${env}
+    record_keys: code,date_
+    partition_keys: year
+    precombine_field: df_meta_system_process_date

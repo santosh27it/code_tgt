@@ -1,0 +1,12 @@
+properties:
+  config_path: Pipeline/PysparkJob/ciq/ciq/ciq.yaml
+  check_point_location: s3://cppib-data-fabric-staging-qa/df_pipeline_strategy_neutral_ciq_dag
+  output_bucket: enriched
+  core_instance_type: m5.12xlarge
+  core_instance_count: 4
+  num_executors: 4
+  driver_memory: 2048m
+  executor_memory: 120G
+  executor_cores: 45
+  shuffle_partition: 1200
+  jars: /usr/lib/spark/jars/httpclient-4.5.9.jar,s3://cppib-data-fabric-staging-ENV/jars/spark-bundle-edwin-relation.jar,/usr/lib/spark/external/lib/spark-avro.jar,/usr/share/aws/hmclient/lib/aws-glue-datacatalog-spark-client-*,/usr/share/aws/aws-java-sdk/aws-java-sdk-glue-*

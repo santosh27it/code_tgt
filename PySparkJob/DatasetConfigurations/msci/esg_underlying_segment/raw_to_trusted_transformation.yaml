@@ -1,0 +1,204 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: data_date
+  df_pipeline_column_type_conversion:
+  - column_name: geo_exp_segment_asset_pct
+    new_type: double
+  - column_name: geo_exp_segment_rev_pct
+    new_type: double
+  - column_name: geo_exp_segment_fiscal_year
+    new_type: date
+  - column_name: bus_exp_segment_asset_pct
+    new_type: double
+  - column_name: bus_exp_segment_rev_pct
+    new_type: double
+  - column_name: bus_exp_segment_fiscal_year
+    new_type: date
+  - column_name: major_layoffs_year
+    new_type: date
+  - column_name: gov_ownership_year
+    new_type: date
+  - column_name: gov_contracts_revenue_pct
+    new_type: double
+  - column_name: gov_political_contributions_value
+    new_type: double
+  - column_name: gov_ownership_pct
+    new_type: double
+  - column_name: cbn_energy_con_year
+    new_type: date
+  - column_name: cbn_energy_con_inten
+    new_type: double
+  - column_name: cbn_energy_con_inten_reported
+    new_type: double
+  - column_name: cbn_renew_energy_con
+    new_type: double
+  - column_name: cbn_renew_energy_usage_pct
+    new_type: double
+  - column_name: cbn_energy_total_co_sales_mm_usd
+    new_type: double
+  - column_name: cbn_total_energy_con
+    new_type: double
+  - column_name: cbn_shale_oil_tar_emiss_pct
+    new_type: double
+  - column_name: cbn_shale_oil_gas_emiss_pct
+    new_type: double
+  - column_name: cbn_the_c_emiss_pct
+    new_type: double
+  - column_name: cbn_energy_con_inten_3y_avg_reported
+    new_type: double
+  - column_name: cbn_energy_con_inten_3y_avg_gics
+    new_type: double
+  - column_name: cbn_energy_con_inten_3y_gics_ind_peer_ratio
+    new_type: double
+  - column_name: cbn_energy_con_inten_3y_cagr
+    new_type: double
+  - column_name: cbn_target_base_year
+    new_type: date
+  - column_name: cbn_target_base_year_val
+    new_type: double
+  - column_name: cbn_target_imp_year
+    new_type: date
+  - column_name: cbn_target_imp_year_val
+    new_type: double
+  - column_name: cbn_target_reduc_pct
+    new_type: double
+  - column_name: cbn_target_year
+    new_type: date
+  - column_name: cbn_target_year_val
+    new_type: double
+  - column_name: cbn_per_yr_reduc_targ_pct
+    new_type: double
+  - column_name: water_con_year
+    new_type: date
+  - column_name: water_fresh_con
+    new_type: double
+  - column_name: water_fresh_con_inten
+    new_type: double
+  - column_name: water_fresh_con_inten_reported
+    new_type: double
+  - column_name: water_fresh_con_reported
+    new_type: double
+  - column_name: water_total_co_sales_mm_usd
+    new_type: double
+  - column_name: water_con_inten_3y_avg
+    new_type: double
+  - column_name: water_con_inten
+    new_type: double
+  - column_name: water_con_total
+    new_type: double
+  - column_name: water_con_total_reported
+    new_type: double
+  - column_name: water_wd_year
+    new_type: date
+  - column_name: water_alternative_use
+    new_type: double
+  - column_name: water_fresh_wd
+    new_type: double
+  - column_name: water_fresh_wd_reported
+    new_type: double
+  - column_name: water_fresh_wd_inten
+    new_type: double
+  - column_name: water_wd_inten_reported
+    new_type: double
+  - column_name: water_wd_other_reported
+    new_type: double
+  - column_name: water_fresh_wd_inten_3y_avg
+    new_type: double
+  - column_name: water_wd_total
+    new_type: double
+  - column_name: water_wd_reported
+    new_type: double
+  - column_name: water_wd_inten
+    new_type: double
+  - column_name: water_recyclying_rate_pct
+    new_type: double
+  - column_name: water_target_baseline_year
+    new_type: date
+  - column_name: water_target_baseline_year_value
+    new_type: double
+  - column_name: water_target_implem_year
+    new_type: date
+  - column_name: water_target_implem_year_value
+    new_type: double
+  - column_name: water_target_progress
+    new_type: double
+  - column_name: water_target_year
+    new_type: date
+  - column_name: water_target_year_value
+    new_type: double
+  - column_name: comp_productivity_year
+    new_type: date
+  - column_name: emp_turnover_annual_pct
+    new_type: double
+  - column_name: ceo_comp_tot
+    new_type: double
+  - column_name: ceo_emp_pay_ratio
+    new_type: double
+  - column_name: company_rev_usd
+    new_type: double
+  - column_name: men_comp_annual_avg
+    new_type: double
+  - column_name: emp_comp_total_workforce
+    new_type: integer
+  - column_name: women_comp_diff_men_pct
+    new_type: double
+  - column_name: emp_revenue_per
+    new_type: double
+  - column_name: emp_salary_per
+    new_type: double
+  - column_name: women_avg_annual_comp
+    new_type: double
+  - column_name: labor_strike_year
+    new_type: date
+  - column_name: labor_strike_emp_affected
+    new_type: integer
+  - column_name: workforce_labor_strike_affected_pct
+    new_type: double
+  - column_name: prof_dev_train_year
+    new_type: date
+  - column_name: prof_dev_train_expenditure_usd
+    new_type: double
+  - column_name: prof_dev_train_hours_per_emp
+    new_type: double
+  - column_name: prof_dev_train_emp_pct
+    new_type: double
+  - column_name: workforce_diversity_year
+    new_type: date
+  - column_name: emp_executive_mgmt
+    new_type: integer
+  - column_name: emp_senior_mgmt
+    new_type: integer
+  - column_name: workforce_div_total_workforce
+    new_type: integer
+  - column_name: women_directors_pct
+    new_type: double
+  - column_name: women_exec_mgmt_pct
+    new_type: double
+  - column_name: women_senior_mgmt_pct
+    new_type: double
+  - column_name: women_workforce_pct
+    new_type: double
+  - column_name: women_exec_mgmt
+    new_type: integer
+  - column_name: women_senior_mgmt
+    new_type: integer
+  - column_name: women_workforce
+    new_type: integer
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      date_key: data_date
+      join_maps: "issuer_isin: isin, issuer_cusip: cusip, issuer_sedol: sedol"
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "issuer_isin: id_isin, issuer_cusip: id_cusip, issuer_sedol: id_sedol"
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: data_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: msci_esg_underlying_segment

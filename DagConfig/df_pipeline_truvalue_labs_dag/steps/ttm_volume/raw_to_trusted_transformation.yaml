@@ -1,0 +1,4 @@
+properties:
+  config_path: Pipeline/PysparkJob/truvalue/ttm_volume/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  driver_memory: 1024m

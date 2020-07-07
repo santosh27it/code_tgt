@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/truvalue/momentum/trusted_to_enriched_transformation.yaml
+  output_bucket: enriched

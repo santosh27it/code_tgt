@@ -1,0 +1,4 @@
+properties:
+  config_path: Pipeline/PysparkJob/refinitiv/esg/csv_to_parquet_raw_transformation.yaml
+  output_bucket: raw
+  output_path: refinitiv/esg/

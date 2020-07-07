@@ -1,0 +1,5 @@
+properties:
+  data_extract_type: file_data
+  data_extract_regex: 'TIMESTARTED=(.*)'
+  data_extract_new_column: pricing_date
+  data_extract_operation: '[{"class": "strings", "function": "parseDateWithTimezone", "use_output": true, "params": {"date": "output", "timezone": "GMT"}}]'

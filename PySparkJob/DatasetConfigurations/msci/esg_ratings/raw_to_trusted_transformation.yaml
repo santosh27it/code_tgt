@@ -1,0 +1,396 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: df_meta_extracted_date
+    new_column_name: data_date
+  df_pipeline_derive_column:
+  - column_name: as_of_date
+    new_column_name: as_of_date
+    expression:
+      name: df_extract_date
+      arg: YYYYMMDD
+  df_pipeline_column_type_conversion:
+  - column_name: iva_rating_date
+    new_type: date
+  - column_name: iva_rating_trend
+    new_type: integer
+  - column_name: industry_adjusted_score
+    new_type: double
+  - column_name: weighted_average_score
+    new_type: double
+  - column_name: esg_overall_quartile
+    new_type: integer
+  - column_name: environmental_pillar_score
+    new_type: double
+  - column_name: environmental_pillar_weight
+    new_type: double
+  - column_name: environmental_pillar_quartile
+    new_type: integer
+  - column_name: social_pillar_score
+    new_type: double
+  - column_name: social_pillar_weight
+    new_type: double
+  - column_name: social_pillar_quartile
+    new_type: integer
+  - column_name: governance_pillar_score
+    new_type: double
+  - column_name: governance_pillar_weight
+    new_type: double
+  - column_name: governance_pillar_quartile
+    new_type: integer
+  - column_name: biodiv_land_use_score
+    new_type: double
+  - column_name: biodiv_land_use_weight
+    new_type: double
+  - column_name: biodiv_land_use_exp_score
+    new_type: double
+  - column_name: biodiv_land_use_mgmt_score
+    new_type: double
+  - column_name: biodiv_land_use_quartile
+    new_type: integer
+  - column_name: carbon_emissions_score
+    new_type: double
+  - column_name: carbon_emissions_weight
+    new_type: double
+  - column_name: carbon_emissions_exp_score
+    new_type: double
+  - column_name: carbon_emissions_mgmt_score
+    new_type: double
+  - column_name: carbon_emissions_quartile
+    new_type: integer
+  - column_name: opps_cln_tech_score
+    new_type: double
+  - column_name: opps_cln_tech_weight
+    new_type: double
+  - column_name: opps_cln_tech_exp_score
+    new_type: double
+  - column_name: opps_cln_tech_mgmt_score
+    new_type: double
+  - column_name: opps_cln_tech_quartile
+    new_type: integer
+  - column_name: financing_env_imp_score
+    new_type: double
+  - column_name: financing_env_imp_weight
+    new_type: double
+  - column_name: financing_env_imp_exp_score
+    new_type: double
+  - column_name: financing_env_imp_mgmt_score
+    new_type: double
+  - column_name: financing_env_imp_quartile
+    new_type: integer
+  - column_name: e_waste_score
+    new_type: double
+  - column_name: e_waste_weight
+    new_type: double
+  - column_name: e_waste_exp_score
+    new_type: double
+  - column_name: e_waste_mgmt_score
+    new_type: double
+  - column_name: e_waste_quartile
+    new_type: integer
+  - column_name: opps_green_building_score
+    new_type: double
+  - column_name: opps_green_building_weight
+    new_type: double
+  - column_name: opps_green_building_exp_score
+    new_type: double
+  - column_name: opps_green_building_mgmt_score
+    new_type: double
+  - column_name: opps_green_building_quartile
+    new_type: integer
+  - column_name: pack_mat_waste_score
+    new_type: double
+  - column_name: pack_mat_waste_weight
+    new_type: double
+  - column_name: pack_mat_waste_exp_score
+    new_type: double
+  - column_name: pack_mat_waste_mgmt_score
+    new_type: double
+  - column_name: pack_mat_waste_quartile
+    new_type: integer
+  - column_name: raw_mat_src_score
+    new_type: double
+  - column_name: raw_mat_src_weight
+    new_type: double
+  - column_name: raw_mat_src_quartile
+    new_type: integer
+  - column_name: opps_renew_energy_score
+    new_type: double
+  - column_name: opps_renew_energy_weight
+    new_type: double
+  - column_name: opps_renew_energy_exp_score
+    new_type: double
+  - column_name: opps_renew_energy_mgmt_score
+    new_type: double
+  - column_name: opps_renew_energy_quartile
+    new_type: integer
+  - column_name: toxic_emiss_wste_score
+    new_type: double
+  - column_name: toxic_emiss_wste_weight
+    new_type: double
+  - column_name: toxic_emiss_wste_exp_score
+    new_type: double
+  - column_name: toxic_emiss_wste_mgmt_score
+    new_type: double
+  - column_name: toxic_emiss_waste_quartile
+    new_type: integer
+  - column_name: ins_climate_chg_risk_score
+    new_type: double
+  - column_name: ins_climate_chg_risk_weight
+    new_type: double
+  - column_name: ins_climate_chg_risk_exp_score
+    new_type: double
+  - column_name: ins_climate_chg_risk_mgmt_score
+    new_type: double
+  - column_name: ins_climate_chg_risk_quartile
+    new_type: integer
+  - column_name: prod_carb_ftprnt_score
+    new_type: double
+  - column_name: prod_carb_ftprnt_weight
+    new_type: double
+  - column_name: prod_carb_ftprnt_exp_score
+    new_type: double
+  - column_name: prod_carb_ftprnt_mgmt_score
+    new_type: double
+  - column_name: prod_carb_ftprnt_quartile
+    new_type: integer
+  - column_name: water_stress_score
+    new_type: double
+  - column_name: water_stress_weight
+    new_type: double
+  - column_name: water_stress_exp_score
+    new_type: double
+  - column_name: water_stress_mgmt_score
+    new_type: double
+  - column_name: water_stress_quartile
+    new_type: integer
+  - column_name: access_to_comm_score
+    new_type: double
+  - column_name: access_to_comm_weight
+    new_type: double
+  - column_name: access_to_comm_exp_score
+    new_type: double
+  - column_name: access_to_comm_mgmt_score
+    new_type: double
+  - column_name: access_to_comm_quartile
+    new_type: integer
+  - column_name: access_to_fin_score
+    new_type: double
+  - column_name: access_to_fin_weight
+    new_type: double
+  - column_name: access_to_fin_exp_score
+    new_type: double
+  - column_name: access_to_fin_mgmt_score
+    new_type: double
+  - column_name: access_to_fin_quartile
+    new_type: integer
+  - column_name: access_to_hlthcre_score
+    new_type: double
+  - column_name: access_to_hlthcre_weight
+    new_type: double
+  - column_name: access_to_hlthcre_exp_score
+    new_type: double
+  - column_name: access_to_hlthcre_mgmt_score
+    new_type: double
+  - column_name: access_to_hlthcre_quartile
+    new_type: integer
+  - column_name: chem_safety_score
+    new_type: double
+  - column_name: chem_safety_weight
+    new_type: double
+  - column_name: chem_safety_exp_score
+    new_type: double
+  - column_name: chem_safety_mgmt_score
+    new_type: double
+  - column_name: chem_safety_quartile
+    new_type: integer
+  - column_name: opps_nutri_hlth_score
+    new_type: double
+  - column_name: opps_nutri_hlth_weight
+    new_type: double
+  - column_name: opps_nutri_hlth_exp_score
+    new_type: double
+  - column_name: opps_nutri_hlth_mgmt_score
+    new_type: double
+  - column_name: opps_nutri_hlth_quartile
+    new_type: integer
+  - column_name: hlth_safety_score
+    new_type: double
+  - column_name: hlth_safety_weight
+    new_type: double
+  - column_name: hlth_safety_exp_score
+    new_type: double
+  - column_name: hlth_safety_mgmt_score
+    new_type: double
+  - column_name: hlth_safety_quartile
+    new_type: integer
+  - column_name: human_capital_dev_score
+    new_type: double
+  - column_name: human_capital_dev_weight
+    new_type: double
+  - column_name: human_capital_dev_exp_score
+    new_type: double
+  - column_name: human_capital_dev_mgmt_score
+    new_type: double
+  - column_name: human_capital_dev_quartile
+    new_type: integer
+  - column_name: labor_mgmt_score
+    new_type: double
+  - column_name: labor_mgmt_weight
+    new_type: double
+  - column_name: labor_mgmt_exp_score
+    new_type: double
+  - column_name: labor_mgmt_mgmt_score
+    new_type: double
+  - column_name: labor_mgmt_quartile
+    new_type: integer
+  - column_name: privacy_data_sec_score
+    new_type: double
+  - column_name: privacy_data_sec_weight
+    new_type: double
+  - column_name: privacy_data_sec_exp_score
+    new_type: double
+  - column_name: privacy_data_sec_mgmt_score
+    new_type: double
+  - column_name: privacy_data_sec_quartile
+    new_type: integer
+  - column_name: prod_sfty_quality_score
+    new_type: double
+  - column_name: prod_sfty_quality_weight
+    new_type: double
+  - column_name: prod_sfty_quality_exp_score
+    new_type: double
+  - column_name: prod_sfty_quality_mgmt_score
+    new_type: double
+  - column_name: prod_sfty_quality_quartile
+    new_type: integer
+  - column_name: controv_src_score
+    new_type: double
+  - column_name: controv_src_weight
+    new_type: double
+  - column_name: controv_src_exp_score
+    new_type: double
+  - column_name: controv_src_mgmt_score
+    new_type: double
+  - column_name: controv_src_quartile
+    new_type: integer
+  - column_name: responsible_invest_score
+    new_type: double
+  - column_name: responsible_invest_weight
+    new_type: double
+  - column_name: responsible_invest_exp_score
+    new_type: double
+  - column_name: responsible_invest_mgmt_score
+    new_type: double
+  - column_name: responsible_invest_quartile
+    new_type: integer
+  - column_name: fin_prod_safety_score
+    new_type: double
+  - column_name: fin_prod_safety_weight
+    new_type: double
+  - column_name: fin_prod_safety_exp_score
+    new_type: double
+  - column_name: fin_prod_safety_mgmt_score
+    new_type: double
+  - column_name: fin_prod_safety_quartile
+    new_type: integer
+  - column_name: supply_chain_lab_score
+    new_type: double
+  - column_name: supply_chain_lab_weight
+    new_type: double
+  - column_name: supply_chain_lab_exp_score
+    new_type: double
+  - column_name: supply_chain_lab_mgmt_score
+    new_type: double
+  - column_name: supply_chain_lab_quartile
+    new_type: integer
+  - column_name: ins_hlth_demo_risk_score
+    new_type: double
+  - column_name: ins_hlth_demo_risk_weight
+    new_type: double
+  - column_name: ins_hlth_demo_risk_exp_score
+    new_type: double
+  - column_name: ins_hlth_demo_risk_mgmt_score
+    new_type: double
+  - column_name: ins_hlth_demo_risk_quartile
+    new_type: integer
+  - column_name: anticomp_pract_score
+    new_type: double
+  - column_name: anticomp_pract_weight
+    new_type: double
+  - column_name: anticomp_pract_mgmt_score
+    new_type: double
+  - column_name: bus_ethics_fraud_score
+    new_type: double
+  - column_name: bus_ethics_fraud_weight
+    new_type: double
+  - column_name: bus_ethics_fraud_mgmt_score
+    new_type: double
+  - column_name: corruption_inst_score
+    new_type: double
+  - column_name: corruption_inst_weight
+    new_type: double
+  - column_name: corruption_inst_exp_score
+    new_type: double
+  - column_name: corruption_inst_mgmt_score
+    new_type: double
+  - column_name: corruption_inst_quartile
+    new_type: integer
+  - column_name: financial_sys_inst_score
+    new_type: double
+  - column_name: financial_sys_inst_weight
+    new_type: double
+  - column_name: financial_sys_inst_exp_score
+    new_type: double
+  - column_name: financial_sys_inst_mgmt_score
+    new_type: double
+  - column_name: financial_sys_inst_quartile
+    new_type: integer
+  - column_name: tax_transp_score
+    new_type: double
+  - column_name: tax_transp_weight
+    new_type: double
+  - column_name: corp_governance_score
+    new_type: double
+  - column_name: corp_governance_weight
+    new_type: double
+  - column_name: corp_governance_quartile
+    new_type: integer
+  - column_name: assessment_change_date
+    new_type: date
+  - column_name: governance_pctl_global
+    new_type: integer
+  - column_name: governance_pctl_home
+    new_type: integer
+  - column_name: board_pctl_global
+    new_type: integer
+  - column_name: board_pctl_home
+    new_type: integer
+  - column_name: pay_pctl_global
+    new_type: integer
+  - column_name: pay_pctl_home
+    new_type: integer
+  - column_name: ownership_pctl_global
+    new_type: integer
+  - column_name: ownership_pctl_home
+    new_type: integer
+  - column_name: accounting_pctl_global
+    new_type: integer
+  - column_name: accounting_pctl_home
+    new_type: integer
+  df_pipeline_sec_id_linkage:
+  - id_mapping_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_id_mapping
+      date_key: data_date
+      join_maps: "issuer_isin: isin"
+  - sec_master_lookup:
+      catalog_db: df_trusted_${env}
+      catalog_table: pas_de_security_equity
+      join_maps: "issuer_isin: id_isin"
+  df_pipeline_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: data_date
+    catalog_db_name: df_trusted_${env}
+    catalog_table_name: msci_esg_ratings

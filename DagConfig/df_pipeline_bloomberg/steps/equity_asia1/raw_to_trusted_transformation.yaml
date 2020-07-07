@@ -1,0 +1,5 @@
+properties:
+  config_path: Pipeline/PysparkJob/bloomberg/equity_price/raw_to_trusted_transformation.yaml
+  output_bucket: trusted
+  driver_memory: 1024m
+  executor_memory: 8g

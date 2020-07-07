@@ -1,0 +1,10 @@
+df_pipeline_canary_dag:
+  description: "Dag for Airflow and EMR health check"
+  tasks:
+    df_pipeline_entry_point:
+    df_pipeline_read_s3_file:
+      dependencies: [df_pipeline_entry_point]
+    df_pipeline_canary_spark:
+      dependencies: [df_pipeline_read_s3_file]
+    df_pipeline_exit_point:
+      dependencies: [df_pipeline_canary_spark]

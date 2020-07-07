@@ -1,0 +1,7 @@
+df_pipeline_fabric_data_util:
+  description: "Utility Dag for fixing data"
+  tasks:
+    submit_pyspark_script:
+      python_callable_name: df_pipeline_submit_pyspark
+    df_pipeline_exit_point:
+      dependencies: [submit_pyspark_script]

@@ -1,0 +1,35 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_rename_column:
+  - column_name: securityid
+    new_column_name: security_id
+  - column_name: ciq_companyid
+    new_column_name: ciq_company_id
+  - column_name: date
+    new_column_name: date_
+  df_pipeline_derive_column:
+  - column_name: date_
+    new_column_name: ym
+    expression:
+      name: df_extract_year_month
+  df_pipeline_column_type_conversion:
+  - column_name: security_id
+    new_type: bigint
+  - column_name: ciq_company_id
+    new_type: bigint
+  - column_name: prccodeus
+    new_type: integer
+  - column_name: prccodeglobal
+    new_type: integer
+  - column_name: prccodeca
+    new_type: integer
+  - column_name: date_
+    new_type: date
+  df_pipeline_upsert:
+  - hudi_table_name: pas_de_id_mapping
+    catalog_db: df_trusted_${env}
+    record_keys: security_id,date_
+    partition_keys: ym
+    write_operation: bulk_insert
+    precombine_field: df_meta_system_process_date
+    output_path: s3://cppib-data-fabric-trusted-${env}/pas_de/pas_de_id_mapping

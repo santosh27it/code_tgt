@@ -1,0 +1,3 @@
+properties:
+  dataset_depends_on: tvlid_mapping
+  dependent_dataset: [ttm_volume, insight, momentum]

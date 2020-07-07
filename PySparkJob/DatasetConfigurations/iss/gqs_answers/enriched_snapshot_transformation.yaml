@@ -1,0 +1,14 @@
+workflow_steps:
+  df_pipeline_read_catalog:
+  - catalog_db: df_enriched_${env}
+    catalog_table: iss_gqs_answers_master
+    filter: file_date <= :run_date
+  df_pipeline_drop:
+  - columns: ['_hoodie_commit_time','_hoodie_commit_seqno','_hoodie_record_key','_hoodie_partition_path','_hoodie_file_name']
+  df_pipeline_snapshot_save:
+  - mode: overwrite
+    format: parquet
+    partition_keys: snapshot_date
+    catalog_db_name: df_enriched_${env}
+    catalog_table_name: iss_gqs_answers
+    output_path: s3://cppib-data-fabric-enriched-${env}/iss/iss_gqs_answers_snapshot/

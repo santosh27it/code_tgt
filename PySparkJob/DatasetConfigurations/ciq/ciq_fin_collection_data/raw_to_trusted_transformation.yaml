@@ -1,0 +1,28 @@
+workflow_steps:
+  df_pipeline_vendor_to_model_read:
+  df_pipeline_column_type_conversion:
+  - column_name: financialcollectionid
+    new_type: integer
+  - column_name: dataitemid
+    new_type: integer
+  - column_name: dataitemvalue
+    new_type: double
+  - column_name: unittypeid
+    new_type: integer
+  - column_name: nmflag
+    new_type: integer
+  - column_name: pacvertofeedpop
+    new_type: integer
+  - column_name: df_meta_run_date
+    new_type: date
+  df_pipeline_upsert_delete:
+  - hudi_table_name: ciq_ciqfincollectiondata_transient
+    catalog_db: df_trusted_${env}
+    record_keys: financialcollectionid,dataitemid
+    partition_keys: dataitemid
+    precombine_field: df_meta_system_process_date
+    del_filter: op='D'
+    insert_split_size: 50000000
+    memory_max_merge_size: 2004857600000
+    select_cols: [financialcollectionid,dataitemid,dataitemvalue,unittypeid,nmflag,pacvertofeedpop,op,df_meta_epoch,df_meta_file_name,df_meta_run_date,df_meta_job_id]
+    output_path: s3://cppib-data-fabric-trusted-${env}/dms/ciq_ciqfincollectiondata

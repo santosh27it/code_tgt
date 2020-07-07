@@ -1,0 +1,3 @@
+properties:
+  config_path: Pipeline/PysparkJob/msci/esg_metrics/trusted_to_enriched_transformation.yaml
+  output_bucket: enriched
